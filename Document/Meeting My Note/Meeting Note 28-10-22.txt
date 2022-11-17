@@ -1,0 +1,13 @@
+28/10/22
+ TO DO:
+	- Hoàn thiện Report 3
+	- Làm Report 4 
+	- ERD cần có Viewer, Web master
+	- Vẽ 1 cái state diagram (Sơ đồ dịch chuyển trạng thái) => cân nhắc
+	- Hệ thống có quản lý Testcase (ghi nhớ kĩ)
+	- DB thêm 1 khóa ngoại giữa user và project, dùng created UserID
+	- Có Defect 
+	- Làm rõ về phần Defect
+	- Code mainflow 60-70%, hoàn thành càng tốt
+	- Thêm Jira Actor
+	- Vẽ sơ đồ kiến trúc dự án

@@ -1,0 +1,9 @@
+14/10/2022
+	- Sử dụng 1 tools khác để quản lí bug
+TODO:
+	- Bỏ QA trang Login
+	- Từng trang hoàn thiện, hoàn thiện từng trang 
+	- Test Case làm xong sớm
+	- Xem lại ERD
+	- ERD dùng từ ngữ chuẩn
+	- Vẽ lại Usecase, chỉnh lại Role

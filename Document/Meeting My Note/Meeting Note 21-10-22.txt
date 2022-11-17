@@ -1,0 +1,5 @@
+21/10/2022 
+	to do:
+	- Xem lại ERD
+	- Hoàn thiện UI
+	- Làm DB 

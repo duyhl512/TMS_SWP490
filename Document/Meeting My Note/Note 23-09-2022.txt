@@ -1,0 +1,9 @@
+Note: Thứ 6 họp với mentor 2h15
+
+Todo:
+	- Đưa hết tài liệu lên GIT
+	- Giờ giấc phải chính xác, không trễ
+	- Tìm hiểu thật nhanh và kĩ
+	- Sửa lại hết UseCase, vẽ cẩn thận UseCase
+	- Note lại DB và ERD	
+	- Tự quyết ROLE, phân quyền động or siết cứng role lại

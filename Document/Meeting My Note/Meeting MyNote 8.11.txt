@@ -1,0 +1,8 @@
+﻿Meeting MyNote 
+ 8 / 11 / 2022
+
+TO DO
+
+- Sửa ERD - UC - DB
+- Hoàn thành những phần quan trọng trong Rp4
+- Tiếp tục code main flow 

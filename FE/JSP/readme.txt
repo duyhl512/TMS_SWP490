@@ -1,2 +1,2 @@
 JSP file only
-JSP / Name ( Test Case ) / Testcase.jsp 
+JSP / Name Folder( Test Case ) / Testcase.jsp 

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login - TMS</title>
+
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.5.2003/css/auth-modern-combined.css"
+              media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/font.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/drilldown.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/style.css"
+              media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/brand-modern.css"
+              media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/assembla.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css"
+              media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
+              media="all" />
+
+        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+        <script type="text/javascript" src="https://static.testrail.io/7.5.4.2008/js/jquery.js"></script>
+        <script type="text/javascript" src="https://static.testrail.io/7.5.4.2008/js/fusioncharts.js"></script>
+        <script type="text/javascript" src="https://static.testrail.io/7.5.4.2008/js/fusioncharts.theme.fusion.js"></script>
+        <script type="text/javascript">
+            var _0x172b = ['915521FAOgwP', '1WUUTor', '85768HrInlH', '1VBoajH', '701113SlGqlh', '596675VFZSmj', '430136IMhboy', 'iyE4qlbA7A3C4A2F1D1I1B1A2A3B1B3fqyH2B7C-16xvhyA2E1lduC7E2B4E2F2G2C1B10B2D1E6C1E1E3E1G2c1D-16yC2A3E2yD1J2B3lozD1B1G4da1wB9B6C6dG-10A-8D3J2A9B1A8C7E1E5A2A1A1sB-22uE2D6G1F1H-8H-7lB8A5C7epG4d1I3B8lnE-13F4E2D3F1H4A10D9C1B5E6B1F4E3E1g==', '9197lCfGYC', '713897AESQnW', '1QhbbSq', 'license', '33GAfgRX']; var _0x3f57b9 = _0x10c9; function _0x10c9(_0x3cfbbf, _0x10e5b7) { _0x3cfbbf = _0x3cfbbf - 0x73; var _0x172b34 = _0x172b[_0x3cfbbf]; return _0x172b34; } (function (_0x22f311, _0x1ab4f2) { var _0x50a77f = _0x10c9; while (!![]) { try { var _0x461480 = parseInt(_0x50a77f(0x7b)) + - parseInt(_0x50a77f(0x75)) * - parseInt(_0x50a77f(0x7e)) + parseInt(_0x50a77f(0x7c)) + parseInt(_0x50a77f(0x78)) + parseInt(_0x50a77f(0x7f)) * parseInt(_0x50a77f(0x79)) + parseInt(_0x50a77f(0x7a)) * - parseInt(_0x50a77f(0x77)) + - parseInt(_0x50a77f(0x76)) * parseInt(_0x50a77f(0x73)); if (_0x461480 === _0x1ab4f2) break; else _0x22f311['push'](_0x22f311['shift']()); } catch (_0x19bcfb) { _0x22f311['push'](_0x22f311['shift']()); } } }(_0x172b, 0x7d53f), FusionCharts['options'][_0x3f57b9(0x74)]({ 'key': _0x3f57b9(0x7d), 'creditLabel': ![] }));
+        </script>
+        <script type="text/javascript" src="https://static.testrail.io/7.5.4.2008/js/html2canvas.js"></script>
+        <script type="text/javascript" src="https://static.testrail.io/7.5.4.2008/js/jquery.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(document).ready(function () {
+            $('#name').focus();
+            });
+        </script>
+        <div id="form" class="loginpage-form">
+            <div class="logo loginpage-logo">
+
+            </div>
+
+            <div id="form-inner">
+                <h1 class="loginpage-installationname">Test Management System</h1>
+                <!--                <style>	
+                                    input:-webkit-autofill {
+                                        -webkit-box-shadow: 0 0 0px 1000px white inset;
+                                    }
+                                </style>-->
+                <div id="content">
+                    <h1 class="loginpage-login-text">Log into Your Account</h1>
+                    <br>
+                    <noscript>
+
+                    </noscript>
+                    <form action="login" method="post">
+                        <div style="min-height: 24px;"></div>
+                        <div class="form-group" style="padding-bottom: 10px;">
+                            <div class="login-inputx">
+                                <input id="name" class="login-input" type="text" name="txtEmail">
+                                <label for="name" class="login-label">Email</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="padding-bottom: 10px; margin-top: -9px;">
+                            <div class="login-inputx">
+                                <input id="password" class="login-input" type="password" name="txtPassword">
+                                <label for="password" class="login-label">Password</label>
+                            </div>
+                        </div>
+                        <div class="display-flex" style="margin-bottom: 40px;">
+                            <div style="float: left;"> </div>
+                            <a href="" class="loginpage-forgotpassword" style="margin-bottom: 10px;">Forgot your password?</a>
+                        </div>
+
+                        <button id="button_primary" 
+                                class="loginpage-button-sso-disable loginpage-button-sso-disable-hover  loginpage-button-sso-disable-active"
+                                type="submit" value="Login" name="action">
+                            <span class="single-sign-on"> Log in</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <span class="loginpage-version">v7.5.5 Default (2022)</span>
+        </div>
+
+        <script type="text/javascript" src="https://static.testrail.io/7.5.5.2003/js/extensions-combined.js"></script>
+        <script type="text/javascript" src="https://static.testrail.io/7.5.5.2003/js/application-combined.js"></script>
+        <script type="text/javascript" id="js-js-indicator" src="https://static.testrail.io/7.5.5.2003/js/indicator.js"></script>
+        <script type="text/javascript" id="js-js-autocomplete" src="https://static.testrail.io/7.5.5.2003/js/autocomplete.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function ()
+            {
+            App.Translations.add(
+                    "timespans_hour_short",
+                    "h");
+            App.Translations.add(
+                    "timespans_minute_short",
+                    "m");
+            App.Translations.add(
+                    "timespans_second_short",
+                    "s");
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+
+
+            });
+        </script>
+        <script type="text/javascript">
+            var browser = function () {
+            // Return cached result if avalible, else get result then cache it.
+            if (browser.prototype._cachedResult)
+                    return browser.prototype._cachedResult;
+            // Opera 8.0+
+            var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+            // Firefox 1.0+
+            var isFirefox = typeof InstallTrigger !== 'undefined';
+            // Safari 3.0+ "[object HTMLElementConstructor]"
+            var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) {
+            return p.toString() === "[object SafariRemoteNotification]";
+            })(!window['safari'] || safari.pushNotification);
+            // Internet Explorer 6-11
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
+            // Edge 20+
+            var isEdge = !isIE && !!window.StyleMedia;
+            // Chrome 1+
+            var isChrome = !!window.chrome && !!window.chrome.webstore;
+            // Blink engine detection
+            var isBlink = (isChrome || isOpera) && !!window.CSS;
+            return browser.prototype._cachedResult =
+                    isOpera ? 'Opera' :
+                    isFirefox ? 'Firefox' :
+                    isSafari ? 'Safari' :
+                    isChrome ? 'Chrome' :
+                    isIE ? 'IE' :
+                    isEdge ? 'Edge' :
+                    isBlink ? 'Blink' :
+                    "Don't know";
+            };
+            $('input[type=password]').val('');
+            if (browser() == 'Edge') {
+            $("#password").removeAttr("autocomplete");
+            }
+            if (browser() != 'IE' && browser() != 'Edge') {
+            $("#password").attr("autocomplete", "new-password");
+            }
+
+            $('.login-input').on('blur change', function () {
+
+            var $label, $this, $value;
+            $this = $(this);
+            $label = $this.siblings("login-label");
+            $value = $this.val();
+            $label.removeClass("label-active");
+            if ($value !== "") {
+            return $this.addClass("input-notempty");
+            } else {
+            return $this.removeClass("input-notempty");
+            }
+            });
+
+        </script>
+
+        <div id="fancy_overlay"></div>
+        <div id="fancy_wrap">
+            <div class="fancy_loading" id="fancy_loading">
+                <div id="fancy_loading_spinner"></div>
+            </div>
+
+            <div id="fancy_outer">
+                <div id="fancy_inner">
+                    <div id="fancy_close"></div>
+                    <div id="fancy_bg"></div>
+                    <div class="fancy_bg fancy_bg_n"></div>
+                    <div class="fancy_bg fancy_bg_ne"></div>
+                    <div class="fancy_bg fancy_bg_e"></div>
+                    <div class="fancy_bg fancy_bg_se"></div>
+                    <div class="fancy_bg fancy_bg_s"></div>
+                    <div class="fancy_bg fancy_bg_sw"></div>
+                    <div class="fancy_bg fancy_bg_w"></div>
+                    <div class="fancy_bg fancy_bg_nw"></div>
+
+                    <a href="javascript:;" id="fancy_left">
+                        <span class="fancy_ico" id="fancy_left_ico"></span>
+                    </a>
+                    <a href="javascript:;" id="fancy_right">
+                        <span class="fancy_ico" id="fancy_right_ico"></span>
+                    </a>
+
+                    <div id="fancy_content"></div>
+                    <div id="fancy_title">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td class="fancy_title" id="fancy_title_left"></td>
+                                    <td class="fancy_title" id="fancy_title_main">
+                                        <div></div>
+                                    </td>
+                                    <td class="fancy_title" id="fancy_title_right"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="jstree-marker" style="display: none;"></div>
+    </body>
+</html>

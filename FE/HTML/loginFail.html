@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Login - TMS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css\login.css">
+    </head>
+    <body>
+        <div id="form">
+            <div id="form-inner">
+                <h1>Test Management System</h1>
+            </div>
+
+            <div id="content">
+
+                <h2>Log into Your Account</h2>
+
+                <article id="login-fail" 
+                         style="font-size: 10px; 
+                         border: 1px solid #f6ccd1; 
+                         background-color: #f6ccd1; border-radius: 6px; width: 400px; margin-left: 15px;" >
+                    <h1>Sorry, there was a problem</h1>
+                    <h2>Email/Login or Password is incorrect. Please try again</h2>
+                </article>
+
+                <form action="" method="POST">
+                    <div style="min-height: 10px;"></div>
+
+                    <div class="form-group">
+                        <div class="login-inputx">
+                            <input type="text" 
+                                   name="txtEmail" 
+                                   placeholder="Email" value="" 
+                                   style="width: 280px; margin-bottom: 10px; height: 20px;">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="login-inputx">
+                            <input type="password" 
+                                   name="txtPassword" 
+                                   placeholder="Password" value="" 
+                                   style="width: 280px; height: 20px; margin-bottom: 10px;">
+                        </div>
+                    </div>
+
+                    <div class="display-flex" style="margin-bottom: 40px;">
+                        <div style="float: left;"></div>
+                        <a href="" style="margin-bottom: 10px;">Forgot your password?</a>
+                    </div>
+
+                    <button id="button-primary" type="submit" value="Login" name="action">
+                        <span class="single-sign-on"> Log In</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

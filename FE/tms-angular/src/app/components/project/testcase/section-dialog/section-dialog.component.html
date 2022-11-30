@@ -1,0 +1,61 @@
+<div class="ui-dialog-titlebar ui-widget-header" style="display: flex;justify-content: space-between;padding: 10px;">
+  <span *ngIf="dialogType === 'add'" class="ui-dialog-title" id="ui-dialog-title-editSectionDialog">
+    Add Section
+  </span>
+  <span *ngIf="dialogType === 'edit'" class="ui-dialog-title" id="ui-dialog-title-editSectionDialog">
+    Edit Section
+  </span>
+  <a class="ui-dialog-titlebar-close ui-corner-all" role="button">
+    <span class="ui-icon ui-icon-closethick" (click)="close()">close</span>
+  </a>
+</div>
+<form id="editSectionForm" class="dialogFormDefault">
+  <div class="dialog-body">
+    <div class="form-group">
+      <label for="editSectionName">Name <span class="form-required">*</span></label>
+      <input [(ngModel)]="section.sectionName" autocomplete="off" class="form-control" type="text"
+        name="editSectionName" id="editSectionName" maxlength="250" value="">
+      <div class="form-description form-description-full">Ex: <em>Save Dialog Tests</em>, <em>Contact Form</em> or
+        <em>Performance Tests</em>
+      </div>
+    </div>
+    <div class="form-group bottom">
+      <label for="editSectionDescription">
+        <span class="form-toolbar" style="padding-top: 0px">
+          <a href="javascript:void(0)"
+            onclick="this.blur(); App.Editor.addTable('#editSectionDescription' + '_display'); return false;"
+            class="link-tooltip" tooltip-text="Add a table to this text field." tabindex="-1">
+            <div class="icon-markdown-table"></div>
+          </a>
+          <a href="javascript:void(0)"
+            onclick="this.blur(); App.Editor.addImage('#editSectionDescription', 2, 'section', ''); return false;"
+            class="link-tooltip" tooltip-text="Add an image to this text field." tabindex="-1">
+            <div class="icon-markdown-image"></div>
+          </a>
+          <a href="https://www.gurock.com/testrail/docs/user-guide/getting-started/editor" class="link-tooltip"
+            tooltip-text="Open the editor formatting reference." target="_blank" tabindex="-1">
+            <div class="icon-markdown-help"></div>
+          </a>
+        </span>
+        Description
+      </label>
+      <div class="textarea-resizable">
+        <textarea [(ngModel)]="section.description"
+          class="form-control form-control-full  processed textarea-with-grippie" rows="6" name="announcement"
+          id="announcement"></textarea>
+        <div class="textarea-grippie"></div>
+      </div>
+      <div class="form-description form-description-full">An optional description for this section (e.g. to explain its
+        content or purpose).</div>
+    </div>
+  </div>
+  <div class="button-group dialog-buttons-highlighted">
+    <button [disabled]="!section.sectionName!.trim()" (click)="submit()"
+      class="button button-left button-positive button-ok dialog-action-default" id="editSectionSubmit" type="button">
+      <!-- <span class="editSectionEdit">Save Section</span> -->
+      <span class="editSectionAdd">Add Section</span>
+    </button>
+    <a (click)="close()" class="button button-left button-negative button-cancel dialog-action-close">
+      Cancel </a>
+  </div>
+</form>

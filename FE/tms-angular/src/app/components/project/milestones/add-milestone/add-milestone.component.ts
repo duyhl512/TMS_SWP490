@@ -33,12 +33,6 @@ export class AddMilestoneComponent implements OnInit {
     milestoneName: '',
     completed: false,
   };
-  configStartDate: IDatePickerDirectiveConfig = {
-    format: 'YYYY-MM-DD',
-  };
-  configEndDate: IDatePickerDirectiveConfig = {
-    format: 'YYYY-MM-DD',
-  };
 
   cancel() {
     this.location.back();
@@ -49,7 +43,7 @@ export class AddMilestoneComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.toastr.success('Add milestone success', 'Success');
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/milestones/' + this.milestone.projectId);
       },
       error: (e) => {
         console.log(e);

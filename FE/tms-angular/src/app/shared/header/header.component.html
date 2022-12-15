@@ -1,0 +1,25 @@
+<header>
+  <div class="navbar" data-controller="layout--navbar" dusk="navbar">
+    <div class="navbar__menu">
+      <ul>
+        <li class="navbar__menu__item--selected"><a><span>{{getFullname()}}</span><i
+              class="fad fa-cog icon-navbar-admin fa-fw"></i></a></li>
+      </ul>
+    </div>
+
+
+    <div class="navbar__trial">
+      <app-search></app-search>
+    </div>
+    <div class="navbar__user">
+      <ul>
+        <li class="">
+          <span id="logout" data-content="Logout" (click)="logout()"
+            style="color: #fff; text-decoration: none; background-color: transparent; cursor: pointer; border: 0;">
+            <i class="fad fa-sign-out icon-sidebar-users fa-fw"></i>Logout
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Mode } from 'src/app/core/mode';
 import { Milestone } from 'src/app/models/milestone';
 import { TestRun } from 'src/app/models/test-run';
 import { User } from 'src/app/models/user';
 import { MilestoneService } from 'src/app/services/milestone.service';
 import { TestRunService } from 'src/app/services/test-run.service';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SelectCaseDialogComponent } from './select-case-dialog/select-case-dialog.component';
+import { ConfirmCloseDialogComponent } from '../confirm-close-dialog/confirm-close-dialog.component';
+import { Result } from 'src/app/models/result';
 
 @Component({
   selector: 'app-add-test-run',
@@ -22,7 +27,8 @@ export class AddTestRunComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   userId = 2;
@@ -30,26 +36,39 @@ export class AddTestRunComponent implements OnInit {
     runName: 'Test Run ' + this.getToday(),
     projectId: 0,
     userId: this.userId,
-    includeAll: true
+    includeAll: true,
   };
   milestones: Milestone[] = [];
   users: User[] = [];
+  testCasesIdIncluded: number[] = [];
+  currentMode: Mode = Mode.Create;
+  Mode = Mode;
 
   ngOnInit(): void {
+    this.currentMode = this.router.url.startsWith('/test-runs-edit/')
+      ? Mode.Update
+      : Mode.Create;
+    console.log('Current mode: ' + this.currentMode);
+
     this.route.params.subscribe((params) => {
       console.log(params);
-      this.testRun.projectId = params['id'];
-      if (!this.testRun.projectId) {
-        return;
+      switch (this.currentMode) {
+        case Mode.Create:
+          this.testRun.projectId = params['id'];
+          this.getMilestonesByProjectId(this.testRun.projectId);
+          break;
+        case Mode.Update:
+          this.testRunService
+            .findByTestRunId(params['id'])
+            .subscribe((testRun) => {
+              this.testRun = testRun;
+              this.getMilestonesByProjectId(this.testRun.projectId);
+            });
+          break;
+        default:
+          break;
       }
-      console.log(this.testRun.projectId);
 
-      this.milestoneService
-        .findAllByProjectId(this.testRun.projectId)
-        .subscribe((milestones) => {
-          this.milestones = milestones;
-          console.log(milestones);
-        });
       this.userService.getUsers().subscribe((users) => {
         this.users = users;
         console.log(users);
@@ -57,16 +76,37 @@ export class AddTestRunComponent implements OnInit {
     });
   }
 
+  getMilestonesByProjectId(projectId: number | undefined) {
+    if (!projectId) {
+      console.error('projectId is undefined');
+      return;
+    }
+    this.milestoneService
+      .findAllByProjectId(projectId)
+      .subscribe((milestones) => {
+        this.milestones = milestones;
+        console.log(milestones);
+      });
+  }
+
   cancel() {
     this.location.back();
   }
 
   submit() {
-    this.testRunService.addTestRun(this.testRun).subscribe({
+    if (this.testCasesIdIncluded.length) {
+      let results: Result[] = this.testCasesIdIncluded.map(
+        caseId => ({
+          caseId: caseId
+        })
+      );
+      this.testRun.testRunResults = results;
+    }
+    this.testRunService.create(this.testRun).subscribe({
       next: (res) => {
         console.log(res);
         this.toastr.success('Add test run success', 'Success');
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/test-runs/' + this.testRun.projectId);
       },
       error: (e) => {
         console.log(e);
@@ -94,5 +134,47 @@ export class AddTestRunComponent implements OnInit {
       result += '' + mm;
     }
     return result + '/' + yyyy;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open<SelectCaseDialogComponent, any, {
+      event: string, data?: number[]
+    }>(SelectCaseDialogComponent, {
+      data: {
+        id: this.testRun.projectId,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.event != 'Cancel' && result.data) {
+        this.testCasesIdIncluded = [...result.data];
+      }
+      console.log(this.testCasesIdIncluded);
+    });
+  }
+
+  close() {
+    this.dialog
+      .open(ConfirmCloseDialogComponent)
+      .afterClosed()
+      .subscribe((result) => {
+        if (result && result.event == 'Close') {
+          this.testRun.isCompleted = true;
+          this.update();
+        }
+      });
+  }
+
+  update() {
+    this.testRunService.update(this.testRun).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.toastr.success('Update test run success', 'Success');
+        this.router.navigateByUrl('/test-runs/' + this.testRun.projectId);
+      },
+      error: (e) => {
+        console.log(e);
+        this.toastr.error('Update test run failed', 'Error');
+      },
+    });
   }
 }

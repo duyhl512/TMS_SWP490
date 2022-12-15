@@ -1,0 +1,73 @@
+<link rel="stylesheet" type="text/css" data-turbolinks-track="reload"
+  href="https://static.testmo.net/v1-6263-a41366a/lib/fontawesome/css/all.css" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" data-turbolinks-track="reload"
+  href="https://static.testmo.net/v1-6263-a41366a/css/app.css" crossorigin="anonymous">
+<script src="https://static.testmo.net/v1-6263-a41366a/js/lang/en.js" data-turbolinks-track="reload"
+  crossorigin="anonymous"></script>
+<script src="https://static.testmo.net/v1-6263-a41366a/js/app.js" data-turbolinks-track="reload"
+  crossorigin="anonymous"></script>
+<script src="https://static.testmo.net/v1-6263-a41366a/js/vendor.js" data-turbolinks-track="reload"
+  crossorigin="anonymous"></script>
+<div class="sidebar" data-controller="layout--sidebar" data-sidebar="admin" dusk="sidebar">
+  <div class="sidebar__sticky" style="background: #FF9933; height: inherit">
+    <div class="sidebar__menu">
+
+      <div class="sidebar__menu__nav sidebar__menu__nav--full" data-sidebar="admin">
+        <div class="sidebar__menu__nav__header">Management</div>
+        <ul>
+          <li class=""><a routerLink="/" dusk="overviewLink" data-content="Overview">
+              <i class="fad fa-chart-bar icon-sidebar-overview fa-fw"></i>
+              <span> Dashboard</span></a></li>
+        </ul>
+        <div class="sidebar__menu__nav__header">Project</div>
+        <ul>
+          <li [class]="selectedMenu == 'overview' ? 'sidebar__menu__nav__item--selected' : '' ">
+            <a [routerLink]="['/overview', projectId]">
+              <i class="fad fa-home icon-sidebar-overview fa-fw"></i><span> Overview</span></a>
+          </li>
+
+          <li [class]="selectedMenu == 'milestone' ? 'sidebar__menu__nav__item--selected' : '' ">
+            <a [routerLink]="['/milestones', projectId]">
+              <i class="fad fa-paste icon-sidebar-milestone fa-fw"></i><span> Milestones</span></a>
+          </li>
+
+          <li [class]="selectedMenu == 'test-runs' ? 'sidebar__menu__nav__item--selected' : '' ">
+            <a [routerLink]="['/test-runs', projectId]">
+              <i class="fad fa-th-large icon-sidebar-test fa-fw"></i><span> Test Runs &amp; Results</span>
+            </a>
+          </li>
+
+          <li [class]="selectedMenu == 'test-cases' ? 'sidebar__menu__nav__item--selected' : '' ">
+            <a [routerLink]="['/test-cases', projectId]">
+              <i class="fad fa-project-diagram icon-sidebar-workflows fa-fw"></i><span> Test Cases</span></a>
+          </li>
+        </ul>
+
+        <div class="sidebar__menu__nav__header">Security</div>
+        <ul>
+          <li class=""><a routerLink="/users-roles" data-content="Users & roles">
+              <i class="fad fa-users icon-sidebar-users fa-fw"></i><span> Users & roles</span></a></li>
+        </ul>
+        <!-- <ul>
+          <li class=""><a data-content="Logout">
+              <i class="fad fa-sign-out icon-sidebar-users fa-fw"></i><span> Logout</span></a></li>
+        </ul> -->
+      </div>
+      <div class="sidebar__menu__nav sidebar__menu__nav--compact">
+        <ul>
+          <li>
+            <a data-action="click->layout--sidebar#doCompactMenu" dusk="compactMenuIcon"><i
+                class="far fa-bars icon-sidebar-menu fa-fw"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar__footer">
+      <a class="sidebar__footer__collapse" dusk="collapseIcon" data-action="click->layout--sidebar#doCollapse">
+        <i class="far fa-angle-left icon-sidebar-collapse"></i>
+        Collapse</a>
+      <a class="sidebar__footer__expand" dusk="expandIcon" data-action="click->layout--sidebar#doExpand">
+        <i class="far fa-angle-right icon-sidebar-expand"></i></a>
+    </div>
+  </div>
+</div>

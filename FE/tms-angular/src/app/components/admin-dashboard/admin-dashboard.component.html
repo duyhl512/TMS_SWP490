@@ -1,119 +1,93 @@
-<app-menu></app-menu>
-<div id="separator"></div>
-<div id="body-container" class="">
-  <div id="body" class="table" style="display: table;">
-    <div id="content" class="column content overflow-content">
-      <div id="content-header" class="content-header content-header-default">
-        <div class="content-header-inner">
-          <div class="content-header-result"></div>
-          <span class="content-header-icon content-header-icon-combined"><a routerLink="javascript:void(0)"
-              class="link-tooltip" tooltip-header="Compact View"
-              tooltip-text="Displays the active projects as a compact list. Useful if you have many projects." onclick="this.blur(); var link = this; var i = document.createElement('input');
-			i.setAttribute('type', 'hidden');
-			i.setAttribute('name', '_token');
-			i.setAttribute('value', 'woB.yMdaWXyDBa8SfdGk');
-			var f = document.createElement('form');
-			f.style.display = 'none';
-			link.parentNode.appendChild(f);
-			f.method = 'POST';
-			f.action = 'index.php?/dashboard/index_display/&amp;display=small';
-			f.appendChild(i);
-			f.submit();; return false;">
-              <div class="icon-display-small-inactive"></div>
-            </a></span><span class="content-header-icon"><a routerLink="javascript:void(0)" class="link-tooltip"
-              tooltip-header="Detail View" tooltip-text="Displays the active projects with many details." onclick="this.blur(); var link = this; var i = document.createElement('input');
-			i.setAttribute('type', 'hidden');
-			i.setAttribute('name', '_token');
-			i.setAttribute('value', 'woB.yMdaWXyDBa8SfdGk');
-			var f = document.createElement('form');
-			f.style.display = 'none';
-			link.parentNode.appendChild(f);
-			f.method = 'POST';
-			f.action = 'index.php?/dashboard/index_display&amp;display=large';
-			f.appendChild(i);
-			f.submit();; return false;">
-              <div class="icon-display-large"></div>
-            </a></span>
-          <div class="content-header-title page_title">
-            All Projects </div>
-        </div>
-      </div>
-      <script type="text/javascript">
-        $("#sites").prop("selectedIndex", 0);
-      </script>
-      <div id="content-inner" class="content-inner ">
-        <div id="content_container">
-          <h1 class="top">Projects</h1>
-          <div id="favs" class="hidden">
-            <div class="table summary summary-auto">
-            </div>
-          </div>
-          <h2 id="activeHeader" class="hidden">
-            Active </h2>
-          <div class="table summary summary-auto">
-            <div *ngFor="let project of projects" class="row project flex-projects-row" id="project-1">
-              <div class="column summary-column summary-column-icon flex-projects-1 icon-project-64 ">
-              </div>
-              <div class="column summary-column flex-projects-2">
-                <div class="summary-title text-ppp" style="position: relative; padding: 1px 0 1px 0">
-                  <a [routerLink]="['/overview', project.projectId]">{{project.projectName}}</a>
-                  <span class="hidden fav-busy">
-                    <div class="icon-progress-inline"></div>
-                  </span>
-                </div>
-                <div class="summary-links text-secondary">
-                  <a class="link" [routerLink]="['/milestones', project.projectId]">Milestones</a> |
-                  <a class="link" [routerLink]="['/test-runs', project.projectId]">Test Runs</a> |
-                  <a class="link" [routerLink]="['/test-cases', project.projectId]">Test Cases</a> |
-                  <a class="link" [routerLink]="['/reports', project.projectId]">Reports</a>
-                </div>
-                <div class="summary-description">
-                  Contains <strong>{{project.activeTestRun}}</strong> active test runs and
-                  <strong>{{project.activeMilestone}}</strong> active milestones.
+<div style="display: flex; height: 100%;">
+  <app-new-menu [selectedMenu]="'dashboard'"></app-new-menu>
+  <div>
+    <section>
+      <app-header></app-header>
+      <div>
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/app-modern-combined.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/font.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/drilldown.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/style.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/brand-modern.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/assembla.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet"
+          href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
+          media="all" />
+        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+
+
+        <div class="table" style="height: 100%;">
+
+          <div id="content" class="column content overflow-content">
+            <div id="content-header" class="content-header content-header-default">
+              <div class="content-header-inner" style="display: flex;justify-content: space-between;">
+                <div class="content-header-title page_title">
+                  All Projects
                 </div>
               </div>
             </div>
+            <script type="text/javascript">
+              $("#sites").prop("selectedIndex", 0);
+            </script>
+            <div id="content-inner" class="content-inner ">
+              <div id="content_container" *ngIf="isActive('DASHBOARD')">
+                <h1 class="top">Projects</h1>
+                <h2 id="activeHeader" class="hidden">
+                  Active </h2>
+                <div class="table summary summary-auto">
+                  <div *ngFor="let project of projects" class="row project flex-projects-row" id="project-1">
+                    <div class="column summary-column summary-column-icon flex-projects-1 icon-project-64 ">
+                    </div>
+                    <div class="column summary-column flex-projects-2">
+                      <div class="summary-title text-ppp" style="position: relative; padding: 1px 0 1px 0">
+                        <a [routerLink]="['/overview', project.projectId]">{{project.projectName}}</a>
+                        <span class="hidden fav-busy">
+                          <div class="icon-progress-inline"></div>
+                        </span>
+                      </div>
+                      <div class="summary-links text-secondary">
+                        <a class="link" [routerLink]="['/milestones', project.projectId]">Milestones</a> |
+                        <a class="link" [routerLink]="['/test-runs', project.projectId]">Test Runs</a> |
+                        <a class="link" [routerLink]="['/test-cases', project.projectId]">Test Cases</a>
+                      </div>
+                      <div class="summary-description">
+                        Contains <strong>{{project.activeTestRun}}</strong> active test runs and
+                        <strong>{{project.activeMilestone}}</strong> active milestones.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <mat-paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+                  [pageSize]="pageSize" [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
+                  [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
+                  [pageIndex]="pageIndex" aria-label="Select page">
+                </mat-paginator>
+              </div>
+
+            </div>
+          </div>
+          <div id="sidebar-splitter" class="column splitter sidebar-splitter">
+          </div>
+          <div id="sidebar" class="column sidebar" style="width: 250px">
+            <div class="sidebar-inner">
+              <a id="sidebar-projects-add" class="sidebar-button" routerLink="project/add"
+                *ngIf="isActive('ADD_PROJECT')">
+                Add Project
+              </a>
+              <p class="top">
+                <strong class="text-softer">{{activeProject}}</strong> active and <strong
+                  class="text-softer">{{completedProject}}</strong> completed projects.
+              </p>
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
-    <div id="qpane-splitter" class="column splitter qpane-splitter" style="display: none">
-    </div>
-    <div id="qpane" class="column qpane" style="width: 600px; display: none">
-      <div id="qpane-empty" class="qpane-empty hidden">
-        <div class="qpane-empty-header">
-          No test case selected. </div>
-        <div class="qpane-empty-body">
-          You can select a different group or change the filters. </div>
-      </div>
-      <div id="qpane-inner">
-        <div id="qpaneSticky">
-          <div id="qpane-content">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="sidebar-splitter" class="column splitter sidebar-splitter">
-    </div>
-    <div id="sidebar" class="column sidebar" style="width: 250px">
-
-      <div class="sidebar-inner">
-        <a id="sidebar-projects-add" class="sidebar-button" routerLink="project/add">
-          Add Project </a>
-        <p class="top"><strong class="text-softer">{{activeProject}}</strong> active and <strong
-            class="text-softer">{{completedProject}}</strong>
-          completed
-          projects.</p>
-        <div class="sidebar-h1 top">
-          Todos <span id="todosBusy" style="display: none;">
-            <div class="icon-progress-inline"></div>
-          </span>
-        </div>
-        <div id="todos" class="hidden" style="display: block;">
-          <p class="top">None.</p>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
 </div>

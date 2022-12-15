@@ -1,3 +1,4 @@
+import { Result } from './result';
 export interface TestRun {
   runName: string,
   runId?: string,
@@ -10,5 +11,11 @@ export interface TestRun {
   fullname?: string,
   isCompleted?: boolean,
   completedOn?: number[] | string,
-  includeAll?: boolean
+  includeAll?: boolean,
+  passedCount?: number,
+  blockedCount?: number,
+  untestedCount?: number,
+  retestCount?: number,
+  failedCount?: number,
+  testRunResults?: Result[]
 }

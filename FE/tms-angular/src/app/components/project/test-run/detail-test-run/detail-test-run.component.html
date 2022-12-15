@@ -1,893 +1,224 @@
-<app-menu-project [projectId]="projectId"></app-menu-project>
-
-<div id="separator"></div>
-<div id="body-container">
-  <div class="table" style=" height: 100%; display: table;">
-    <div id="content" class="column content overflow-content">
-      <div id="notificationbar" class="notificationbar notificationbar-hidden">
-      </div>
-      <div class="notificationbar notificationbar-local">
-      </div>
-      <div id="content-header" class="content-header content-header-default">
-        <div class="content-header-inner">
-          <div class="content-header-result"></div>
-          <div class="content-header-id">R24</div>
-          <div class="toolbar content-header-toolbar"><a
-              class="toolbar-button content-header-button button-responsive button-edit toolbar-button-last"
-              href="index.php?/runs/edit/24/1" rel="keep-get"><span class="button-text">Edit</span></a><a
-              class="toolbar-button content-header-button button-responsive button-start" href="javascript:void(0)"
-              onclick="this.blur(); App.Runs.rerun(24, 1); return false;"><span class="button-text">Rerun</span></a><a
-              class="toolbar-button toolbar-button-last content-header-button button-responsive button-report dropdownLink"
-              href="#reportDropdown"><span class="button-text">Reports</span><span
-                class="caret button-caret"></span></a><a
-              class="toolbar-button toolbar-button-first content-header-button button-defect dropdownLink"
-              href="#defectDropdown">Defects<span class="caret button-caret"></span></a></div><span
-            class="content-header-icon"><a href="javascript:void(0)" class="link-tooltip" tooltip-header="Close Run"
-              tooltip-text="Closes this test run to archive its tests and results. Prevents future modifications."
-              onclick="this.blur(); var link = this; App.Dialogs.confirm('Really close this test run? Closing a test run archives the related tests and prevents future modifications. This change cannot be undone.', function() { var i = document.createElement('input');
-			i.setAttribute('type', 'hidden');
-			i.setAttribute('name', '_token');
-			i.setAttribute('value', 'GfD1ScRHYIseFNXMaPab');
-			var f = document.createElement('form');
-			f.style.display = 'none';
-			link.parentNode.appendChild(f);
-			f.method = 'POST';
-			f.action = 'index.php?/runs/close/24';
-			f.appendChild(i);
-			f.submit();; } );; return false;">
-              <div class="icon-close"></div>
-            </a></span><span class="content-header-icon"><a id="printPopupLink" class="popupLink link-tooltip"
-              rel="print" href="index.php?/runs/plot/24&amp;format=outline" tooltip-header="Print Run"
-              tooltip-text="Opens a print view of this test run.">
-              <div class="icon-print"></div>
-            </a></span><span class="content-header-icon"><a class="dropdownLink link-tooltip" href="#exportDropdown"
-              tooltip-header="Export Run" tooltip-text="Exports this test run into different formats (XML, Excel/CSV).">
-              <div class="icon-export"></div>
-            </a></span><span id="unsubscribed" class="content-header-icon ">
-            <a class="subscribe link-tooltip" href="javascript:void(0)"
-              onclick="this.blur(); App.Runs.subscribe(24); return false;"
-              tooltip-text="Subscribe to receive emails on test changes for this test run.">
-              <div class="icon-subscribe"></div>
-            </a>
-            <span class="hidden busy">
-              <div class="icon-progress-standard"></div>
-            </span>
-          </span>
-          <span id="subscribed" class="content-header-icon hidden">
-            <a class="unsubscribe link-tooltip" href="javascript:void(0)"
-              onclick="this.blur(); App.Runs.unsubscribe(24); return false;"
-              tooltip-text="Unsubscribe from email updates on test changes for this test run.">
-              <div class="icon-unsubscribe"></div>
-            </a>
-            <span class="hidden busy">
-              <div class="icon-progress-standard"></div>
-            </span>
-          </span>
-          <div class="content-header-title page_title">
-            Test Run 11/25/2022 </div>
-        </div>
-      </div>
-      <script type="text/javascript">
-        $("#sites").prop("selectedIndex", 0);
-      </script>
-      <div id="content-inner" class="content-inner goals-clear">
-        <div id="groupContainer" style="margin-top: 1.5em; display: block;">
-          <div id="groupContent">
-            <div id="groups">
-              <div *ngFor="let section of map | keyvalue" id="section-4" rel="4" class="group grid-container">
-                <div class="grid-title">
-                  <span class="title" id="sectionName-4">{{section.key}}</span>
-                  <span class="text-secondary section-count" id="sectionCount-4">{{section.value.length}}</span>
-                  <a style="margin-left: 5px" href="javascript:void(0)"
-                    onclick="this.blur(); App.Sections.edit(4, 1); return false;">
-                    <div class="icon-small-edit icon-small-inline"></div>
+<div style="display: flex; height: 100%;">
+  <app-new-menu-project [projectId]="projectId" [selectedMenu]="'test-runs'"></app-new-menu-project>
+  <div>
+    <section>
+      <app-header></app-header>
+      <div>
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/app-modern-combined.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/font.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/drilldown.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/style.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/brand-modern.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/assembla.css"
+          media="all" />
+        <link type="text/css" rel="stylesheet"
+          href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
+        <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
+          media="all" />
+        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+        <div class="table" style="height: 100%;">
+          <div id="content" class="column content overflow-content">
+            <div id="notificationbar" class="notificationbar notificationbar-hidden">
+            </div>
+            <div class="notificationbar notificationbar-local">
+            </div>
+            <div id="content-header" class="content-header content-header-default">
+              <div class="content-header-inner">
+                <div class="content-header-result"></div>
+                <div class="content-header-id">{{testRunId}}</div>
+                <span id="subscribed" class="content-header-icon hidden">
+                  <a class="unsubscribe link-tooltip"
+                    tooltip-text="Unsubscribe from email updates on test changes for this test run.">
+                    <div class="icon-unsubscribe"></div>
                   </a>
-                  <a style="margin-left: 5px" href="javascript:void(0)"
-                    onclick="this.blur(); App.Dialogs.remove('l:suites_sections_confirm_delete', 'l:suites_sections_confirm_delete_checkbox', null, function() { App.Sections.removeInit(4); }, function() { App.Sections.remove(4); });; return false;">
-                    <div class="icon-small-delete hidden action-hover"></div>
-                  </a>
-                  <span id="sectionBusy-4" class="busy" style="display: none;">
-                    <div class="icon-progress-inline"></div>
+                  <span class="hidden busy">
+                    <div class="icon-progress-standard"></div>
                   </span>
-                </div>
-                <div id="sectionDesc-4" class="hidden remove_scroll_add_margin scroll-auto">
-                  <div class="scroll-auto-inner markdown">
-                  </div>
-                </div>
-                <table id="grid-4" class="grid" style="margin-bottom: 0.75em">
-                  <colgroup>
-                    <col class="checkbox">
-                    <col style="width: 65px">
-                    <col style="">
-                    <col style="width: 125px">
-                    <col class="action columns">
-                  </colgroup>
-                  <tbody>
-                    <tr class="header">
-                      <th class="checkbox"><input type="checkbox" class="selectionCheckbox"
-                          onclick="App.Tests.onToggleAllClick(this)"></th>
-                      <th>
-                        <a class="link-noline" title="ID" href="javascript:void(0)"
-                          onclick="this.blur(); App.Runs.setTestGrouping('tests:id'); return false;"><span>ID</span></a>
-                        <div class="column-actions">
-                        </div>
-                      </th>
-                      <th>
-                        <a class="link-noline" title="Title" href="javascript:void(0)"
-                          onclick="this.blur(); App.Runs.setTestGrouping('cases:title'); return false;"><span>Title</span></a>
-                        <div class="column-actions">
-                        </div>
-                      </th>
-                      <th>
-                        <a class="link-noline" href="javascript:void(0)"
-                          onclick="this.blur(); App.Runs.setTestGrouping('tests:status_id'); return false;">
-                          <span class="hidden-xs">Status</span>
-                          <span class="visible-xs hidden" style="display: none;">St.</span>
-                        </a>
-                      </th>
-                      <th class="action columns" id="selectColumns-1">
-                        <span class="select"><a href="javascript:void(0)"
-                            onclick="this.blur(); App.Runs.selectTestColumns(1, 1); return false;">
-                            <div class="icon-columns"></div>
-                          </a></span><span class="busy">
+                </span>
+                <div class="content-header-title page_title">{{testRunName}}</div>
+              </div>
+            </div>
+            <script type="text/javascript">
+              $("#sites").prop("selectedIndex", 0);
+            </script>
+            <div id="content-inner" class="content-inner goals-clear">
+              <div id="groupContainer" style="margin-top: 1.5em; display: block;">
+                <div id="groupContent">
+                  <div id="groups">
+                    <div *ngFor="let section of map | keyvalue" id="section-4" rel="4" class="group grid-container">
+                      <div class="grid-title">
+                        <span class="title" id="sectionName-4">{{section.key}}</span>
+                        <span class="text-secondary section-count" id="sectionCount-4">{{section.value.length}}</span>
+                        <span id="sectionBusy-4" class="busy" style="display: none;">
                           <div class="icon-progress-inline"></div>
                         </span>
-                      </th>
-                    </tr>
-                    <tr *ngFor="let result of section.value" id="row-{{result.resultId}}" class="row odd">
-                      <td class="checkbox"><input name="selected-4086" type="checkbox" value="4086"
-                          class="selectionCheckbox" onclick="App.Tests.onRowClick(this)"></td>
-                      <td class="id"><a class="link-noline" rel="keep-get"
-                          href="index.php?/tests/view/4086">{{result.resultId}}</a>
-                      </td>
-                      <td>
-                        <a href="index.php?/tests/view/4086" rel="keep-get">
-                          {{result.caseName}}
-                        </a>
-                      </td>
-                      <td class="js-status" rel="4">
-                        <!-- <a #button (click)="openDropDown($event)" *ngIf="result.status == 'Untested'" rel="4086"
-                          class="dropdownLink status hidden-xs"
+                      </div>
+                      <div id="sectionDesc-4" class="hidden remove_scroll_add_margin scroll-auto">
+                        <div class="scroll-auto-inner markdown">
+                        </div>
+                      </div>
+                      <table id="grid-4" class="grid" style="margin-bottom: 0.75em">
+                        <tbody>
+                          <tr class="header">
+                            <th>
+                              <span>ID</span>
+                              <div class="column-actions">
+                              </div>
+                            </th>
+                            <th><span>Title</span>
+                              <div class="column-actions">
+                              </div>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                              <span style="float: right;" class="hidden-xs">Status</span>
+                            </th>
+                          </tr>
+                          <tr *ngFor="let result of section.value" id="row-{{result.resultId}}" class="row odd">
+                            <td class="id">
+                              {{result.resultId}}
+                            </td>
+                            <td>
+                              {{result.caseName}}
+                            <td class="js-status" rel="4">
+                            </td>
+                            <td class="js-status" rel="4">
+                              <!-- <a id="a-{{result.resultId}}" #button (click)="openDropDown($event)"
+                          *ngIf="result.status == 'Untested'" class="custom-dropdown dropdownLink status hidden-xs"
                           style="background: #737373; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDropDown($event)" *ngIf="result.status == 'Passed'" rel="4086"
-                          class="dropdownLink status hidden-xs"
+                            class="custom-dropdown caret button-caret"></span></a>
+                        <a id="a-{{result.resultId}}" #button (click)="openDropDown($event)"
+                          *ngIf="result.status == 'Passed'" class="custom-dropdown dropdownLink status hidden-xs"
                           style="background: #338a41; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDropDown($event)" *ngIf="result.status == 'Blocked'" rel="4086"
-                          class="dropdownLink status hidden-xs"
+                            class="custom-dropdown caret button-caret"></span></a>
+                        <a id="a-{{result.resultId}}" #button (click)="openDropDown($event)"
+                          *ngIf="result.status == 'Blocked'" class="custom-dropdown dropdownLink status hidden-xs"
                           style="background: #474747; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDropDown($event)" *ngIf="result.status == 'Retest'" rel="4086"
-                          class="dropdownLink status hidden-xs"
+                            class="custom-dropdown caret button-caret"></span></a>
+                        <a id="a-{{result.resultId}}" #button (click)="openDropDown($event)"
+                          *ngIf="result.status == 'Retest'" class="custom-dropdown dropdownLink status hidden-xs"
                           style="background: #b99109; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDropDown($event)" *ngIf="result.status == 'Failed'" rel="4086"
-                          class="dropdownLink status hidden-xs"
+                            class="custom-dropdown caret button-caret"></span></a>
+                        <a id="a-{{result.resultId}}" #button (click)="openDropDown($event)"
+                          *ngIf="result.status == 'Failed'" class="custom-dropdown dropdownLink status hidden-xs"
                           style="background: #a9093a; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a> -->
-
-                        <a #button (click)="openDialog(result.status, result.resultId)" *ngIf="result.status == 'Untested'" rel="4086"
-                          class="dropdownLink status hidden-xs"
-                          style="background: #737373; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDialog(result.status, result.resultId)" *ngIf="result.status == 'Passed'" rel="4086"
-                          class="dropdownLink status hidden-xs"
-                          style="background: #338a41; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDialog(result.status, result.resultId)" *ngIf="result.status == 'Blocked'" rel="4086"
-                          class="dropdownLink status hidden-xs"
-                          style="background: #474747; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDialog(result.status, result.resultId)" *ngIf="result.status == 'Retest'" rel="4086"
-                          class="dropdownLink status hidden-xs"
-                          style="background: #b99109; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                        <a #button (click)="openDialog(result.status, result.resultId)" *ngIf="result.status == 'Failed'" rel="4086"
-                          class="dropdownLink status hidden-xs"
-                          style="background: #a9093a; color: #ffffff">{{result.status}}<span
-                            class="caret button-caret"></span></a>
-                      </td>
-                      <td class="action">
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                            class="custom-dropdown caret button-caret"></span></a> -->
+                              <button [ngStyle]="{'cursor': (isCompleted ? 'unset' : 'pointer')}"
+                                [disabled]="isCompleted" #button (click)="openDialog(result.status, result.resultId)"
+                                *ngIf="result.status == 'Untested'" class="dropdownLink status hidden-xs"
+                                style="border: unset; float: right; background: #737373; color: #ffffff">{{result.status}}
+                                <span class="caret button-caret"></span>
+                              </button>
+                              <button [ngStyle]="{'cursor': (isCompleted ? 'unset' : 'pointer')}"
+                                [disabled]="isCompleted" #button (click)="openDialog(result.status, result.resultId)"
+                                *ngIf="result.status == 'Passed'" class="dropdownLink status hidden-xs"
+                                style="border: unset; float: right; background: #338a41; color: #ffffff">{{result.status}}
+                                <span class="caret button-caret"></span>
+                              </button>
+                              <button [ngStyle]="{'cursor': (isCompleted ? 'unset' : 'pointer')}"
+                                [disabled]="isCompleted" #button (click)="openDialog(result.status, result.resultId)"
+                                *ngIf="result.status == 'Blocked'" class="dropdownLink status hidden-xs"
+                                style="border: unset; float: right; background: #474747; color: #ffffff">{{result.status}}
+                                <span class="caret button-caret"></span>
+                              </button>
+                              <button [ngStyle]="{'cursor': (isCompleted ? 'unset' : 'pointer')}"
+                                [disabled]="isCompleted" #button (click)="openDialog(result.status, result.resultId)"
+                                *ngIf="result.status == 'Retest'" class="dropdownLink status hidden-xs"
+                                style="border: unset; float: right; background: #b99109; color: #ffffff">{{result.status}}
+                                <span class="caret button-caret"></span>
+                              </button>
+                              <button [ngStyle]="{'cursor': (isCompleted ? 'unset' : 'pointer')}"
+                                [disabled]="isCompleted" #button (click)="openDialog(result.status, result.resultId)"
+                                *ngIf="result.status == 'Failed'" class="dropdownLink status hidden-xs"
+                                style="border: unset; float: right; background: #a9093a; color: #ffffff">{{result.status}}
+                                <span class="caret button-caret"></span>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
 
 
 
 
-    <div id="qpane-splitter" class="column splitter qpane-splitter" style="display: none">
-    </div>
-    <div id="qpane" class="column qpane" style="width: 600px; display: none">
-      <div id="qpane-empty" class="qpane-empty hidden">
-        <div class="qpane-empty-header">
-          No test case selected. </div>
-        <div class="qpane-empty-body">
-          You can select a different group or change the filters. </div>
-      </div>
-      <div id="qpane-inner">
-        <div id="qpaneSticky">
-          <div id="qpane-content">
+          <div id="qpane-splitter" class="column splitter qpane-splitter" style="display: none">
+          </div>
+          <div id="qpane" class="column qpane" style="width: 600px; display: none">
+            <div id="qpane-empty" class="qpane-empty hidden">
+              <div class="qpane-empty-header">
+                No test case selected. </div>
+              <div class="qpane-empty-body">
+                You can select a different group or change the filters. </div>
+            </div>
+            <div id="qpane-inner">
+              <div id="qpaneSticky">
+                <div id="qpane-content">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="sidebar-splitter" class="column splitter sidebar-splitter">
+          </div>
+          <div id="sidebar" class="column sidebar" style="width: 250px">
+
+            <div class="sidebar-inner">
+              <p style="margin: 0">
+                Created on {{createDate}}
+              </p>
+            </div>
+
+            <div class="sidebar-menu">
+              <ul>
+                <li class="sidebar-menu-item sidebar-menu-item-first sidebar-menu-item-selected">
+                  <a id="navigation-runs-testsresults">
+                    Tests &amp; Results</a>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-inner">
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div id="sidebar-splitter" class="column splitter sidebar-splitter">
-    </div>
-    <div id="sidebar" class="column sidebar" style="width: 250px">
 
-      <div class="sidebar-inner">
-        <p style="margin: 0">
-          Created by Thắng on 11/25/2022. <br>
-          References
-        </p>
       </div>
 
-      <div class="sidebar-menu">
+      <div id="statusDropdown" #statusDropdown class="dropdown dropdown-menu"
+        [ngStyle]="{'top': top, 'left': left, 'width': '175px', 'display': 'block', 'position': 'absolute' }"
+        *ngIf="top && left">
         <ul>
-          <li class="sidebar-menu-item sidebar-menu-item-first sidebar-menu-item-selected">
-            <a id="navigation-runs-testsresults" href="index.php?/runs/view/24">
-              Tests &amp; Results</a>
+          <li>
+            <a class="dropdown-menu-link">
+              <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #338a41"></span>Passed</a>
           </li>
-          <li class="sidebar-menu-item ">
-            <a id="navigation-runs-activity" href="index.php?/runs/activity/24">
-              Activity</a>
+          <li class="dropdown-menu-separator"></li>
+          <li>
+            <a class="dropdown-menu-link">
+              <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #474747"></span>Blocked</a>
           </li>
-          <li class="sidebar-menu-item ">
-            <a id="navigation-runs-progress" href="index.php?/runs/progress/24">
-              Progress</a>
+          <li class="dropdown-menu-separator"></li>
+          <li>
+            <a class="dropdown-menu-link">
+              <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #b99109"></span>Retest</a>
           </li>
-          <li class="sidebar-menu-item ">
-            <a id="navigation-runs-defects" href="index.php?/runs/defects/24">
-              Defects</a>
+          <li class="dropdown-menu-separator"></li>
+          <li>
+            <a class="dropdown-menu-link">
+              <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #a9093a"></span>Failed</a>
           </li>
         </ul>
       </div>
-      <div class="sidebar-inner">
-
-      </div>
-
-      <div id="sidebar-inner" class="sidebar-inner">
-        <div id="sidebarSticky">
-          <div class="toolbar " id="sidebarToolbar">
-            <div class="toolbar-inner">
-              <a href="#displayDropdown" class="link dropdownLink toolbar-dropdown">
-                <span class="toolbar-dropdown-icon">
-                  <div class="icon-display-tree-inactive"></div>
-                </span>
-                <span class="toolbar-dropdown-text link-dashed">All</span>
-                <div class="icon-desc"></div>
-              </a>
-            </div>
-          </div>
-          <div class="clear"></div>
-          <div id="groupTreeContainer">
-          </div>
-        </div>
-      </div>
-
-      <script type="text/javascript">
-        $(document).ready(function () {
-          App.Tables.columns_for_user = {};
-          App.Tables.columns_for_user['tests:id'] = 65;
-          App.Tables.columns_for_user['cases:title'] = 0;
-          App.Tables.columns_for_user['tests:assignedto_id'] = 125;
-
-          App.Tables.columns = {};
-          App.Tables.columns['tests:assignedto_id'] = 'Assigned To';
-          App.Tables.columns['cases:custom_automation_type'] = 'Automation Type';
-          App.Tables.columns['tests:original_case_id'] = 'Case ID';
-          App.Tables.columns['tests:defects'] = 'Defects';
-          App.Tables.columns['tests:defects_all'] = 'Defects All';
-          App.Tables.columns['tests:elapsed'] = 'Elapsed';
-          App.Tables.columns['tests:elapsed_all'] = 'Elapsed All';
-          App.Tables.columns['cases:estimate'] = 'Estimate';
-          App.Tables.columns['cases:estimate_forecast'] = 'Forecast';
-          App.Tables.columns['tests:id'] = 'ID';
-          App.Tables.columns['tests:in_progress_by'] = 'In Progress';
-          App.Tables.columns['cases:priority_id'] = 'Priority';
-          App.Tables.columns['cases:refs'] = 'References';
-          App.Tables.columns['cases:section_id'] = 'Section';
-          App.Tables.columns['tests:status_id'] = 'Status';
-          App.Tables.columns['cases:template_id'] = 'Template';
-          App.Tables.columns['tests:tested_by'] = 'Tested By';
-          App.Tables.columns['tests:tested_on'] = 'Tested On';
-          App.Tables.columns['cases:title'] = 'Title';
-          App.Tables.columns['cases:type_id'] = 'Type';
-          App.Tables.columns['tests:version'] = 'Version';
-          App.Tables.columns['tests:version_all'] = 'Version All';
-
-          App.Tables.group_by = 'cases:section_id';
-          App.Tables.group_order = 'asc';
-
-
-          App.Tables.runsColumns = {};
-
-        });
-      </script>
-
-      <script type="text/javascript">
-        $(document).ready(function () {
-          App.Storage.init();
-
-          App.Runs.columns_for_qpane = {};
-          App.Runs.columns_for_qpane['tests:id'] = 65;
-          App.Runs.columns_for_qpane['cases:title'] = 0;
-
-          $('#contentSticky').sticky(
-            {
-              topPadding: 15,
-              height: 28,
-              className: 'content-sticky',
-              container: '#content-inner'
-            });
-
-          $('#qpaneSticky').sticky(
-            {
-              className: 'qpane-sticky',
-              container: '#qpane-inner'
-            });
-
-          $('#sidebarSticky').sticky(
-            {
-              topSpacing: 15,
-              className: 'sidebar-sticky',
-              container: '#sidebar-inner'
-            });
-
-          App.Runs.project_id = 1;
-          App.Runs.run_id = 24;
-          App.Runs.display = 'tree';
-          App.Runs.user_ids = [];
-          App.Runs.page_type = 'view';
-
-
-          App.Runs.scroll_offset = 58;
-
-          App.Runs.applyActions();
-          App.Runs.applyResponsive();
-          App.Runs.applyQPane(0);
-          App.Runs.initialized = true;
-
-          App.Runs.showInitial();
-        });
-      </script>
-
-      <script type="text/javascript">
-        $(document).ready(function () {
-          App.Translations.add(
-            "tests_status",
-            "Status");
-        });
-      </script>
-      <script type="text/javascript">
-        $(document).ready(function () {
-          App.Hotkeys.registerAlt(
-            'r',
-            function () {
-              if (App.QPane.isVisible()) {
-                App.Tests.addResultQPane(
-                  1,
-                  App.QPane.getCurrentRowID()
-                );
-              }
-            }
-          );
-
-          App.References.applyLookup(1);
-        });
-      </script>
-
-
-
-      <script type="text/javascript">
-        var isFilter = 0;
-
-        $('#filterTestsContent, #exportCsvSectionsSelection').click(function () {
-          isFilter = 1;
-        });
-
-        $('body').on('click', '#filterTestsCancel, #filterTestsApply, .button-cancel', function () {
-          isFilter = 0;
-        });
-
-        $('body').keyup(function (e) {
-          if (!$(e.target).is('input')) {
-            var DKey = 68;
-            var EKey = 69;
-            var RKey = 82;
-            var PKey = 80;
-            var MKey = 77;
-            var AKey = 65;
-            var JKey = 74;
-            var KKey = 75;
-            var QKey = 81;
-
-            if ($('#dialog-ident-exportCsvDialog').css('display') === 'none') {
-              isFilter = 0;
-            }
-
-            if (e.which === DKey && !e.ctrlKey && isFilter === 0) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                App.Defects.preparePush(1, 0, 'runs/view', 24);
-              }
-            }
-
-            if (e.which === EKey && isFilter === 0) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                App.Page.load('runs/edit/24/1');
-              }
-            }
-
-            if (e.which === RKey && !e.ctrlKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                App.Tests.massAddResult(1);
-              }
-            }
-
-            if (e.which === PKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                if (App.QPane.isVisible()) {
-                  App.Runs.passRowAndNext(
-                    App.QPane.getCurrentRowID()
-                  );
-                }
-              }
-            }
-
-            if (e.which === MKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                if (App.QPane.isVisible()) {
-                  App.Tests.addCommentNoDialogActivate(
-                    App.QPane.getCurrentRowID()
-                  );
-                }
-              }
-            }
-
-            if (e.which === AKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                App.Tests.massAssignTo();
-              }
-            }
-
-            if (e.which === JKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                if (App.QPane.isVisible()) {
-                  App.Runs.nextRow();
-                }
-              }
-            }
-
-            if (e.which === KKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                if (App.QPane.isVisible()) {
-                  App.Runs.prevRow();
-                }
-              }
-            }
-
-            if (e.which === QKey) {
-              if (!$(e.target).hasClass('form-control-full') && !$(e.target).attr('contenteditable')) {
-                if (!App.Ajax.isBusy()) {
-                  App.QPane.tryToggleRow();
-                }
-              }
-            }
-          }
-        });
-      </script>
-
-
-    </div>
-  </div>
-
-</div>
-
-<div id="statusDropdown" #statusDropdown class="dropdown dropdown-menu"
-  [ngStyle]="{'top': top, 'left': left, 'width': '175px', 'display': 'block', 'position': 'absolute' }"
-  *ngIf="top && left">
-  <ul>
-    <li>
-      <a class="dropdown-menu-link" href="javascript:void(0)"
-        onclick="this.blur(); App.Tests.addResultInline(1, 1); return false;">
-        <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #338a41"></span>Passed</a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link" href="javascript:void(0)"
-        onclick="this.blur(); App.Tests.addResultInline(1, 2); return false;">
-        <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #474747"></span>Blocked</a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link" href="javascript:void(0)"
-        onclick="this.blur(); App.Tests.addResultInline(1, 4); return false;">
-        <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #b99109"></span>Retest</a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link" href="javascript:void(0)"
-        onclick="this.blur(); App.Tests.addResultInline(1, 5); return false;">
-        <span class="status-mini" style="float: left; margin: 1px 5px 0 0; background: #a9093a"></span>Failed</a>
-    </li>
-  </ul>
-</div>
-
-<!--
-<div id="ajaxResponse" class="hidden"></div>
-
-<div id="userDropdown" class="dropdown dropdown-menu user-menu" rel="helpMenu" style="width: 125px">
-  <ul>
-    <li><a class="dropdown-menu-link" id="navigation-user-settings" href="index.php?/mysettings">
-        My Settings</a></li>
-    <li><a class="dropdown-menu-link" id="navigation-user-logout" href="index.php?/auth/logout">Logout</a></li>
-  </ul>
-</div>
-<div class="dialog" id="messageDialog" style="width: 350px; word-wrap: break-word">
-  <div class="dialog-title"></div>
-  <div class="dialog-body">
-    <p style="margin: 0" class="dialog-message"></p>
-  </div>
-  <div class="button-group dialog-buttons-highlighted">
-    <a class="button button-ok button-left button-positive dialog-action-default">
-      OK </a>
+    </section>
   </div>
 </div>
-<div class="dialog" id="confirmDialog" style="width: 350px">
-  <div class="dialog-title">Confirmation</div>
-  <div class="dialog-body">
-    <p style="margin: 0" class="dialog-message"></p>
-  </div>
-  <div class="button-group dialog-buttons-highlighted">
-    <a class="button button-ok button-left button-positive dialog-action-default">
-      Yes </a>
-    <a class="button button-cancel button-left button-negative dialog-action-close">
-      No </a>
-  </div>
-</div>
-
-<div id="confirmDialogOkCancel" class="dialog">
-  <div class="dialog-title">Confirmation</div>
-  <div class="dialog-body">
-    <p class="dialog-message"></p>
-  </div>
-  <div class="button-group dialog-buttons-highlighted">
-    <a class="button button-ok button-left button-positive dialog-action-default">
-      OK </a>
-    <a class="button button-cancel button-left button-negative dialog-action-close">
-      Cancel </a>
-  </div>
-</div>
-<div id="tooltip" class="tooltip">
-  <div class="tooltip-pointer-up"></div>
-  <div class="tooltip-pointer-down"></div>
-  <div class="tooltip-pointer-right"></div>
-  <div class="tooltip-header"></div>
-  <p style="margin: 0"></p>
-</div>
-<div class="dialog" id="deleteDialog" style="width: 425px">
-  <div class="dialog-title">Confirmation</div>
-  <div class="dialog-body">
-    <p class="top bottom dialog-message"></p>
-    <p class="dialog-extra text-delete"></p>
-    <div class="message message-delete bottom delete-confirm-container" style="margin-top: 12px; line-height: 1">
-      <div class="checkbox">
-        <label>
-          <span class="dialog-confirm"></span>
-          <span class="dialog-confirm-busy">
-            <div class="icon-progress-inline"></div>
-          </span>
-          <input type="checkbox" value="1" name="deleteCheckbox" />
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="button-group dialog-buttons-highlighted">
-    <a class="button button-ok button-ok-disabled button-left button-positive button-disabled dialog-action-default">
-      OK </a>
-    <a
-      class='button button-left button-positive button-disabled button-hidden button-no-margin-right dialog-action-secondary'>
-    </a>
-    <a class="button button-cancel button-left button-negative dialog-action-close">
-      Cancel </a>
-  </div>
-</div>
-<div class="dialog" id="dpaDialog" style="max-width: 725px">
-  <div class="dialog-title">Confirmation</div>
-  <div class="dialog-body">
-    <p class="top bottom dialog-message"></p>
-    <p class="dialog-extra text-delete"></p>
-
-    <form action="index.php?/admin/users/accept_data_processing_agreement" id="dpa_form" method="post"> <input
-        type="hidden" name="_token" value="GfD1ScRHYIseFNXMaPab" />
-      <div class="form-group">
-        <label for="name">Please enter your full name:<span class="form-required">*</span></label>
-        <input class="form-control " type="text" name="full_name" id="full_name" maxlength="250" value="">
-      </div>
-
-    </form>
-    <div class="message message-delete bottom delete-confirm-container"
-      style="margin-top: 12px; line-height: 1; padding-bottom: 50px">
-      <div class="checkbox">
-        <label>
-          <span class="dialog-confirm"></span>
-          <input type="checkbox" value="1" name="deleteCheckbox" />
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="button-group dialog-buttons-highlighted">
-    <a class="button button-ok button-ok-disabled button-left button-positive button-disabled dialog-action-default">
-      Submit </a>
-    <a class="button button-cancel button-left button-negative dialog-action-close">
-      Cancel </a>
-  </div>
-</div>
-<div class="dialog" id="trEnterpriseDialog" style="width: 350px; word-wrap: break-word">
-  <div class="dialog-title"></div>
-  <form action="index.php?/mysettings/tr_enterprise_banner_setting" id="tr_enterprise_form" method="post"> <input
-      type="hidden" name="_token" value="GfD1ScRHYIseFNXMaPab" />
-    <div class="dialog-body">
-      <p style="margin: 0" class="dialog-message"></p>
-      <div class="form-group">
-        <div class="radio">
-          <label>
-            <input type="radio" class="radio" name="tr_enterprise_banner_display" value="0" checked>
-            Remove for this Session </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" class="radio" name="tr_enterprise_banner_display" value="1">
-            Remove forever </label>
-        </div>
-      </div>
-    </div>
-    <div class="button-group dialog-buttons-highlighted">
-      <input type="submit" value="Submit" class="button button-ok button-left button-positive dialog-action-default">
-      <a class="button button-cancel button-left button-negative dialog-action-close">
-        Cancel </a>
-    </div>
-  </form>
-</div>
-
-<div class="dialog" id="deleteEntityAttachmentDialog" style="width: 425px">
-  <div class="dialog-title">Confirmation</div>
-  <div class="dialog-body">
-    <p class="top bottom dialog-message"></p>
-    <p class="dialog-extra text-delete"></p>
-    <div class="message message-delete bottom delete-confirm-container" style="margin-top: 12px; line-height: 1">
-      <div class="checkbox">
-        <label>
-          <span class="dialog-confirm">Don’t show me this again</span>
-          <input id='deleteDontShowAgain' type="checkbox" value="1" name="deleteCheckbox" />
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="button-group dialog-buttons-highlighted">
-    <a
-      class="button button-ok button-left button-positive dialog-action-default delete-entity-attachment-button-submit">
-      Delete </a>
-    <a class="button button-cancel button-left button-negative dialog-action-close">
-      Cancel </a>
-  </div>
-</div>
-
-<script>
-  $(function () {
-    $(document).delegate('.dialog-buttons-highlighted .delete-entity-attachment-button-submit', 'click', function (evt) {
-      App.Attachments.dontShowEntityDeleteDialog = $('#deleteDontShowAgain').prop('checked');
-      App.Ajax.call({
-        target: '/mysettings/ajax_delete_entity_attachment_setting',
-
-        arguments: {
-          dont_show: $('#deleteDontShowAgain').prop('checked')
-        },
-
-        error: function error(data) {
-          App.Ajax.handleError(data);
-        }
-      });
-    });
-  });
-</script>
-
-
-<div id="helpDropdown" class="dropdown dropdown-menu help-menu" rel="helpMenu" style="width: 175px">
-  <ul>
-    <li>
-      <a class="dropdown-menu-link" target="_blank"
-        href="https://www.gurock.com/testrail/docs/user-guide/getting-started">
-        TestRail User Guide </a>
-    </li>
-    <li>
-      <a class="dropdown-menu-link" target="_blank" href="http://www.gurock.com/testrail/support">
-        Support &amp; Videos </a>
-    </li>
-    <li>
-      <a class="dropdown-menu-link" target="_blank" href="http://forum.gurock.com/">
-        Community Forum </a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link" target="_blank"
-        href="https://www.gurock.com/testrail/docs/user-guide/howto/keyboard-shortcuts-hotkeys">
-        Keyboard Shortcuts </a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link" target="_blank" href="http://blog.gurock.com/">
-        Gurock Blog </a>
-    </li>
-    <li>
-      <a class="dropdown-menu-link" target="_blank" href="http://twitter.com/testrail">
-        TestRail on Twitter </a>
-    </li>
-    <li>
-      <a class="dropdown-menu-link" target="_blank" href="http://www.gurock.com/testrail/">
-        TestRail on the Web </a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link dropdown-menu-link-highlighted" target="_blank"
-        href="https://secure.gurock.com/customers/testrail/newsletter?email=doanvanthang4271@gmail.com">
-        Subscribe to Newsletter </a>
-    </li>
-    <li class="dropdown-menu-separator"></li>
-    <li>
-      <a class="dropdown-menu-link" href="javascript:void(0)"
-        onclick="this.blur(); App.Help.showAbout(); return false;">
-        About TestRail </a>
-    </li>
-  </ul>
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#bannerLink').bubble({
-      bubble: '#enterpriseBubble',
-      inContainer: true
-    });
-
-    $('#content').on('change', 'input:checkbox[name="entity_run"]', function () {
-      delselectAll(this, 'run')
-    });
-
-    $('#content').on('change', 'input:checkbox[name="entity_milestones"]', function () {
-      delselectAll(this, 'milestones')
-    });
-  });
-
-  function delselectAll(type, entity) {
-    let parent = $(type).data('option');
-    if (parent === undefined) {
-      $('input:checkbox[name=select_all]').each(function () {
-        let select = $(this).parent().closest('div').attr('id');
-
-        if ($('#' + select).find(type).length > 0) {
-          parent = select;
-        }
-      });
-    }
-    let selector = '#' + parent;
-    $(selector)
-      .find('input:checkbox[name="select_all"]')
-      .prop(
-        'checked',
-        $(selector + ' input:checked[name="entity_' + entity + '"]').length ===
-        $(selector + ' input:checkbox[name="entity_' + entity + '"]').length
-      );
-    $('#delete-' + entity).css(
-      'display',
-      $('input:checked[name="entity_' + entity + '"]').length > 0
-        ? 'block'
-        : 'none'
-    );
-  }
-
-  function SelectAllEntity(type) {
-    let parent = $(type).parent().closest('div').attr('id');
-    let checked_status = $(type).is(':checked');
-    $('#' + parent).find('input[type=checkbox]')
-      .attr('data-option', parent)
-      .not(':disabled')
-      .prop(
-        'checked',
-        checked_status
-      );
-    let selector = $('#' + parent).find('input:checkbox[name="entity_milestones"]').length
-      ? 'milestones'
-      : 'run';
-    $('#delete-' + selector).css(
-      'display',
-      checked_status && $('input:checked[name="entity_' + selector + '"]').length
-        ? 'block'
-        : 'none'
-    );
-  }
-</script>
-
-<div class='dialog dialog_attachment' id='attachmentInfoDialog' style='width: 900px; height: 531px;'></div>
-<div id='newAttachmentTemplate' style='display: none;'>
-  <div style='width: 150px; height: 150px; '
-    class='attachment-block attachment-attachment_icon attachment_selected_class lazy'
-    id='libraryAttachment-attachment_id' onclick="App.Attachments.showInfoDialog('attachment_id');"
-    title='attachment_name'>
-    <div class='attachment-icon' style=''></div>
-    <div class='attachment-name'>
-      attachment_truncated_name
-    </div>
-    <img attachment_src_tag='attachment_imgurl' attachment_onerror_tag='attachment_img_onerror' class='hidden-image' />
-    <div class='attachment-selection attachment_selected_class'
-      onclick="App.Attachments.toggleSelection('attachment_id', event);"></div>
-  </div>
-</div>
-<div id='libraryAttachmentsAddItemTemplate' style='display: none;'>
-  <div id='element_id' class='attachment-library-add'>
-    <div class='attachment-library-add-icon'></div>
-  </div>
-</div>
-
-<script type="text/javascript" src="https://static.testrail.io/7.5.6.3001/js/extensions-combined.js"></script>
-<script type="text/javascript" src="https://static.testrail.io/7.5.6.3001/js/application-combined.js"></script>
-
-<script type="text/javascript" id="js-js-indicator"
-  src="https://static.testrail.io/7.5.6.3001/js/indicator.js"></script>
-<script type="text/javascript" id="js-js-autocomplete"
-  src="https://static.testrail.io/7.5.6.3001/js/autocomplete.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    App.Translations.add(
-      "timespans_hour_short",
-      "h");
-    App.Translations.add(
-      "timespans_minute_short",
-      "m");
-    App.Translations.add(
-      "timespans_second_short",
-      "s");
-  });
-</script>
-<script type='application/javascript'>
-  (function (apiKey) { // <-- passed in at the bottom
-    (function (p, e, n, d, o) {
-      var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = [];
-      v = ['initialize', 'identify', 'updateOptions', 'pageLoad']; for (w = 0, x = v.length; w < x; ++w)(function (m) {
-        o[m] = o[m] || function () { o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0))); };
-      })(v[w]);
-      // Create a `<script>` tag linked to your application-specific Agent build from our CDN...
-      y = e.createElement(n); y.async = !0; y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
-      z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
-    })(window, document, 'script', 'pendo');
-    pendo.initialize({
-      sanitizeUrl: function (url) {
-        return url.replace('index.php?', 'index.php')
-      },
-      visitor: {
-        id: '736674-3',
-        is_admin: true,
-        is_active: true
-      },
-      account: {
-        id: '736674'
-      }
-    });
-  })('1c20428c-1995-4c00-6e1c-daff12af9c00');
-</script>
-
-<script>
-  $(function () {
-    App.Sidebar.init();
-
-    App.Editor.codePreformat();
-  });
-</script> -->

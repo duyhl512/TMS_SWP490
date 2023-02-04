@@ -1,0 +1,150 @@
+<div style="display: flex; height: 100%;">
+  <app-new-menu-project [projectId]="this.report.projectId + ''" [selectedMenu]="'reports'"></app-new-menu-project>
+  <div style="display: flex;flex-direction: column;">
+    <app-header></app-header>
+    <div style="flex: 1">
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/app-modern-combined.css"
+        media="all" />
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/font.css" media="all" />
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/drilldown.css"
+        media="all" />
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/style.css"
+        media="all" />
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/brand/brand-modern.css"
+        media="all" />
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/assembla.css"
+        media="all" />
+      <link type="text/css" rel="stylesheet"
+        href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
+      <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
+        media="all" />
+      <div id="body" class="table" style="display: table;">
+        <div id="content" class="column content overflow-content">
+          <div style="height: 100%; overflow-y: scroll; padding: 0 15px">
+            <div id="content">
+              <h1>{{report.reportName}}</h1>
+              <p class="comment bottom">
+                Project: {{report.projectName}}<br>By {{report.fullName}}, {{report.createdOn}}
+              </p>
+
+              <div id="statsContainer">
+                <div class="chart-pie" rel="4">
+                  <div style="height: 100%;" class="table-extended" id="tablechart_testun">
+                    <div style="padding: 0; height: 100%;" id="statusChartContainer">
+                      <div id="chart">
+                        <apx-chart #chart *ngIf="chartOptions !== undefined" [series]="chartOptions.series"
+                          [chart]="chartOptions.chart" [labels]="chartOptions.labels" [colors]="chartOptions.colors">
+                        </apx-chart>
+                      </div>
+                    </div>
+                    <div class="column chart-pie-column-percent">
+                      <div class="chart-pie-percent" style="padding-top: 5em">
+                        <div class="chart-pie-percent-title">{{percentPassed}}%</div>
+                        <div class="chart-pie-percent-description">passed</div>
+                        <div class="chart-pie-percent-note text-secondary" style="line-height: 130%">
+                          {{numUntested}} / {{totalResults}} untested ({{percentUntested}}%).
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a download="TestRail-stats-1-20230107092820.png" href="#" id="dl" hidden="">download image</a>
+              </div>
+
+              <h1 class="top"><img class="right noPrint w16"
+                  src="index.php?/reports/get_resource/1&amp;path=images/report-assets/help.svg" alt=""
+                  title="Shows the test runs of this report.">Test Runs</h1>
+              <div id="completed">
+                <div *ngFor="let entry of testRunsMap | keyvalue">
+                  <h3>
+                    <span class="title">{{entry.key}}</span>
+                  </h3>
+                  <table class="run-grid grid">
+                    <colgroup>
+                      <col>
+                      <col>
+                    </colgroup>
+                    <tbody>
+                      <tr *ngFor="let testRun of entry.value" class="odd hoverSensitive">
+                        <td style="width: 300px;">
+                          <a [routerLink]="['/test-runs', this.report.projectId, 'detail', testRun.runId]">
+                            {{testRun.runName}}
+                          </a>
+                        </td>
+                        <td>
+                          {{testRun.passedCount}} Passed, {{testRun.blockedCount}} Blocked,
+                              {{testRun.untestedCount}}
+                              Untested, {{testRun.retestCount}} Retest and {{testRun.failedCount}} Failed.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <h1><img class="right noPrint w16"
+                  src="index.php?/reports/get_resource/1&amp;path=images/report-assets/help.svg" alt=""
+                  title="Shows the tests and their current statuses for the selected test runs.">Tests &amp; Results
+              </h1>
+              <ng-template ngFor let-testRun [ngForOf]="sectionResultsMap | keyvalue" let-i="index">
+                <h2>
+                  {{testRun.key}}
+                </h2>
+
+                <ng-template ngFor let-section [ngForOf]="testRun.value| keyvalue" let-i="index">
+                  <h3>
+                    {{section.key}}
+                  </h3>
+                  <table class="grid">
+                    <colgroup>
+                      <col style="width: 75px">
+                      <col>
+                      <col style="width: 125px">
+                    </colgroup>
+                    <tbody>
+                      <tr class="header">
+                        <th class="w30 id">ID</th>
+                        <th class="w30 title">Title</th>
+                        <th class="status">Status</th>
+                      </tr>
+                      <tr *ngFor="let result of section.value">
+                        <td class="id">
+                          T{{result.resultId}}
+                        </td>
+                        <td>
+                          {{result.caseName}}
+                        </td>
+                        <td class="js-status" rel="4">
+                          <button [disabled]="true" #button *ngIf="result.status == 'Untested'"
+                            class="dropdownLink status hidden-xs"
+                            style="border: unset; float: right; background: #737373; color: #ffffff">{{result.status}}
+                          </button>
+                          <button [disabled]="true" #button *ngIf="result.status == 'Passed'"
+                            class="dropdownLink status hidden-xs"
+                            style="border: unset; float: right; background: #338a41; color: #ffffff">{{result.status}}
+                          </button>
+                          <button [disabled]="true" #button *ngIf="result.status == 'Blocked'"
+                            class="dropdownLink status hidden-xs"
+                            style="border: unset; float: right; background: #474747; color: #ffffff">{{result.status}}
+                          </button>
+                          <button [disabled]="true" #button *ngIf="result.status == 'Retest'"
+                            class="dropdownLink status hidden-xs"
+                            style="border: unset; float: right; background: #b99109; color: #ffffff">{{result.status}}
+                          </button>
+                          <button [disabled]="true" #button *ngIf="result.status == 'Failed'"
+                            class="dropdownLink status hidden-xs"
+                            style="border: unset; float: right; background: #a9093a; color: #ffffff">{{result.status}}
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ng-template>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

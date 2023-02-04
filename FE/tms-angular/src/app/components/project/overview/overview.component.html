@@ -19,18 +19,14 @@
           href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
         <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
           media="all" />
-        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+
 
         <div class="table" style="height: 100%;">
           <div id="content" class="column content overflow-content">
-            <div id="notificationbar" class="notificationbar notificationbar-hidden">
-            </div>
-            <div class="notificationbar notificationbar-local">
-            </div>
             <div id="content-header" class="content-header content-header-default">
               <div class="content-header-inner">
                 <div class="content-header-result"></div>
-                <div class="content-header-id">P1</div>
+                <div class="content-header-id">P{{project.projectId}}</div>
                 <div class="content-header-title page_title">
                   {{project.projectName}}
                 </div>
@@ -41,16 +37,16 @@
                 <div class="table">
                   <div class="column column-p2 column-pad-right">
                     <h1 class="top"><a id="navigation-overview-viewmilestones" class="nolink"
-                        [routerLink]="['/milestones', projectId]">Milestones</a>
+                        [routerLink]="['/milestones', projectId]">Phase</a>
                     </h1>
                     <div *ngIf="milestones.length == 0; then thenMilestoneBlock else elseMilestoneBlock"></div>
                     <ng-template #thenMilestoneBlock>
                       <p>This project doesn't have any active milestones.
                         You can add a new milestone.</p>
                       <div class="button-group">
-                        <a id="navigation-overview-addmilestones" [routerLink]="['/milestones-add', projectId]"
-                          class="button button-left button-add">
-                          Add Milestone </a>
+                        <a *ngIf="isActive('ADD_MILESTONE')" id="navigation-overview-addmilestones"
+                          [routerLink]="['/milestones-add', projectId]" class="button button-left button-add">
+                          Add Phase </a>
                       </div>
                     </ng-template>
                     <ng-template #elseMilestoneBlock>
@@ -61,7 +57,8 @@
                           </div>
                           <div class="column summary-column  flex-milestones-2-compact summary-column-first ">
                             <div class="summary-title summary-title-compact text-ppp">
-                              <a id="navigation-overview-viewmilestones">{{milestone.milestoneName}}</a>
+                              <a [routerLink]="['/milestones', projectId, 'detail', milestone.milestoneId]"
+                                id="navigation-overview-viewmilestones">{{milestone.milestoneName}}</a>
                             </div>
                             <div class="summary-description-compact text-secondary text-ppp">
                               {{milestone.endDate ? "Due on " + milestone.endDate : "No due date"}}
@@ -80,8 +77,8 @@
                       <p>This project doesn't have any active test
                         runs. You can add a new test run.</p>
                       <div class="button-group">
-                        <a id="navigation-overview-addrunssuite" [routerLink]="['/test-runs-add', projectId]"
-                          class="button button-left button-add">
+                        <a *ngIf="isActive('ADD_TESTRUN')" id="navigation-overview-addrunssuite"
+                          [routerLink]="['/test-runs-add', projectId]" class="button button-left button-add">
                           Add Test Run </a>
                       </div>
                     </ng-template>
@@ -105,7 +102,7 @@
                     </ng-template>
                   </div>
                 </div>
-                <!-- <app-activity></app-activity> -->
+                <app-activity></app-activity>
               </div>
             </div>
           </div>
@@ -137,10 +134,11 @@
                   </div>
                   <div class="column summary-column summary-column-first">
                     <div class="summary-title summary-title-compact">
-                      <a id="sidebar-milestones-overview" [routerLink]="['/milestones', projectId]">Milestones</a>
+                      <a id="sidebar-milestones-overview" [routerLink]="['/milestones', projectId]">Phase</a>
                     </div>
                     <div class="summary-description-compact text-secondary">
-
+                      <a *ngIf="isActive('ADD_MILESTONE')" id="sidebar-runs-add" class="link"
+                        [routerLink]="['/milestones-add', projectId]">Add</a> |
                       <a id="sidebar-milestones-viewall" class="link" [routerLink]="['/milestones', projectId]">View
                         All</a>
                     </div>
@@ -154,7 +152,8 @@
                       <a id="sidebar-runs-overview" [routerLink]="['/test-runs', projectId]">Test Runs</a>
                     </div>
                     <div class="summary-description-compact text-secondary">
-                      <a id="sidebar-runs-add" class="link" [routerLink]="['/test-runs-add', projectId]">Add</a> |
+                      <a *ngIf="isActive('ADD_TESTRUN')" id="sidebar-runs-add" class="link"
+                        [routerLink]="['/test-runs-add', projectId]">Add</a> |
                       <a id="sidebar-runs-viewall" class="link" [routerLink]="['/test-runs', projectId]">View
                         All</a>
                     </div>
@@ -168,7 +167,8 @@
                       <a id="sidebar-cases-overview" [routerLink]="['/test-cases', projectId]">Test Cases</a>
                     </div>
                     <div class="summary-description-compact text-secondary">
-
+                      <a *ngIf="isActive('ADD_TESTCASE')" id="sidebar-runs-add" class="link"
+                        [routerLink]="['/test-cases-add', projectId]">Add</a> |
                       <a id="sidebar-suites-viewall" class="link" [routerLink]="['/test-cases', projectId]">View
                         All</a>
                     </div>

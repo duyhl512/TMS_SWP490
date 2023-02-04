@@ -1,5 +1,6 @@
-<div style="display: flex; height: 100%;">
-  <app-new-menu-project [projectId]="milestone.projectId + ''" [selectedMenu]="'milestone'"></app-new-menu-project>
+<div *ngIf="isActive('ADD_MILESTONE') || isActive('EDIT_MILESTONE')" style="display: flex; height: 100%;">
+  <app-new-menu-project [projectId]="milestone.projectId + ''" [selectedMenu]="'milestone'"
+    (getProject)="project = $event"></app-new-menu-project>
   <div>
     <section>
       <app-header></app-header>
@@ -19,16 +20,22 @@
           href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
         <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
           media="all" />
-        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+
         <div class="table" style="height: 100%;">
           <div id="content" class="column content overflow-content">
 
 
             <div id="content-header" class="content-header content-header-default">
               <div class="content-header-inner">
-                <div class="content-header-result"></div>
-                <div class="content-header-title page_title">
-                  Add Milestone </div>
+                <div *ngIf="currentMode == Mode.Create" class="content-header-title page_title">
+                  Add Phase
+                </div>
+                <ng-template [ngIf]="currentMode == Mode.Update">
+                  <div class="content-header-id">M{{milestone.milestoneId}}</div>
+                  <div class="content-header-title page_title">
+                    {{milestone.milestoneName}}
+                  </div>
+                </ng-template>
               </div>
             </div>
             <div id="content-inner" class="content-inner goals-clear">
@@ -63,7 +70,7 @@
                 <div class="form-group">
                   <label for="due_on">Start Date</label>
                   <input #startDate name="startDate" [(ngModel)]="milestone.startDate"
-                    [dpDayPicker]="{format: 'YYYY-MM-DD', max: endDate.value}"
+                    [dpDayPicker]="{format: 'YYYY-MM-DD', min: getProjectStartDate(), max: findMaxDate(endDate.value)}"
                     class="form-control form-control-small dirty-trackable-datepicker hasDatepicker">
                   <div class="form-description">The expected or scheduled start date of this milestone (for
                     upcoming and not yet active milestones).</div>
@@ -71,7 +78,7 @@
                 <div class="form-group">
                   <label for="due_on">End Date</label>
                   <input #endDate name="endDate" [(ngModel)]="milestone.endDate"
-                    [dpDayPicker]="{format: 'YYYY-MM-DD', min: startDate.value}"
+                    [dpDayPicker]="{format: 'YYYY-MM-DD', min: findMinDate(startDate.value), max: getProjectEndDate()}"
                     class="form-control form-control-small dirty-trackable-datepicker hasDatepicker">
                   <div class="form-description">The expected due or end date of this milestone.</div>
                 </div>
@@ -81,8 +88,8 @@
                   <div class="checkbox">
                     <label>
                       <strong>This milestone is completed</strong>
-                      <input type="checkbox" [checked]="milestone.completed"
-                        (change)="milestone.completed = !milestone.completed">
+                      <input type="checkbox" [checked]="milestone.isCompleted"
+                        (change)="milestone.isCompleted = !milestone.isCompleted">
                     </label>
                   </div>
                   <div class="form-description">Tests and test cases can only be assigned to active
@@ -90,9 +97,15 @@
                 </div>
 
                 <div class="button-group form-buttons">
-                  <button (click)="submit()" id="accept" class="button button-left button-positive button-ok"
-                    type="button" [disabled]="milestone.milestoneName.trim().length == 0 || !milestone.projectId">
-                    Add Milestone
+                  <button *ngIf="currentMode == Mode.Update && isActive('EDIT_MILESTONE')" type="button"
+                    (click)="update()" class="button button-left button-positive button-ok"
+                    [disabled]="milestone.milestoneName.trim().length == 0 || !milestone.projectId">
+                    Save Phase
+                  </button>
+                  <button *ngIf="currentMode == Mode.Create && isActive('ADD_MILESTONE')" (click)="submit()"
+                    class="button button-left button-positive button-ok" type="button"
+                    [disabled]="milestone.milestoneName.trim().length == 0 || !milestone.projectId">
+                    Add Phase
                   </button>
                   <a (click)="cancel()" class="button button-left button-negative button-cancel milestone-form-cancel">
                     Cancel </a>

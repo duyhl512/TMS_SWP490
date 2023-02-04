@@ -1,12 +1,12 @@
 <link rel="stylesheet" type="text/css" data-turbolinks-track="reload"
-  href="https://static.testmo.net/v1-6263-a41366a/lib/fontawesome/css/all.css" crossorigin="anonymous">
+  href="/tms/assets/all.css" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" data-turbolinks-track="reload"
-  href="https://static.testmo.net/v1-6263-a41366a/css/app.css" crossorigin="anonymous">
-<script src="https://static.testmo.net/v1-6263-a41366a/js/lang/en.js" data-turbolinks-track="reload"
+  href="/tms/assets/app.css" crossorigin="anonymous">
+<script src="/tms/assets/en.js" data-turbolinks-track="reload"
   crossorigin="anonymous"></script>
-<script src="https://static.testmo.net/v1-6263-a41366a/js/app.js" data-turbolinks-track="reload"
+<script src="/tms/assets/app.js" data-turbolinks-track="reload"
   crossorigin="anonymous"></script>
-<script src="https://static.testmo.net/v1-6263-a41366a/js/vendor.js" data-turbolinks-track="reload"
+<script src="/tms/assets/vendor.js" data-turbolinks-track="reload"
   crossorigin="anonymous"></script>
 <div class="sidebar" data-controller="layout--sidebar" data-sidebar="admin" dusk="sidebar">
   <div class="sidebar__sticky" style="background: #FF9933; height: inherit">
@@ -28,7 +28,7 @@
 
           <li [class]="selectedMenu == 'milestone' ? 'sidebar__menu__nav__item--selected' : '' ">
             <a [routerLink]="['/milestones', projectId]">
-              <i class="fad fa-paste icon-sidebar-milestone fa-fw"></i><span> Milestones</span></a>
+              <i class="fad fa-paste icon-sidebar-milestone fa-fw"></i><span> Phase</span></a>
           </li>
 
           <li [class]="selectedMenu == 'test-runs' ? 'sidebar__menu__nav__item--selected' : '' ">
@@ -41,17 +41,27 @@
             <a [routerLink]="['/test-cases', projectId]">
               <i class="fad fa-project-diagram icon-sidebar-workflows fa-fw"></i><span> Test Cases</span></a>
           </li>
+
+          <li [class]="selectedMenu == 'reports' ? 'sidebar__menu__nav__item--selected' : '' ">
+            <a [routerLink]="['/reports', projectId]">
+              <i class="fad fa-file icon-sidebar-workflows fa-fw"></i><span> Reports</span></a>
+          </li>
+
+          <li [class]="selectedMenu == 'members' ? 'sidebar__menu__nav__item--selected' : '' ">
+            <a [routerLink]="['/members', projectId]">
+              <i class="fad fa-users icon-sidebar-users fa-fw"></i><span> Members</span></a>
+          </li>
         </ul>
 
-        <div class="sidebar__menu__nav__header">Security</div>
-        <ul>
-          <li class=""><a routerLink="/users-roles" data-content="Users & roles">
-              <i class="fad fa-users icon-sidebar-users fa-fw"></i><span> Users & roles</span></a></li>
-        </ul>
-        <!-- <ul>
-          <li class=""><a data-content="Logout">
-              <i class="fad fa-sign-out icon-sidebar-users fa-fw"></i><span> Logout</span></a></li>
-        </ul> -->
+        <ng-template [ngIf]="isActive('LIST_USER_ROLE')">
+          <div class="sidebar__menu__nav__header">Security</div>
+          <ul>
+            <li>
+              <a routerLink="/users-roles" data-content="Users & roles">
+                <i class="fad fa-users icon-sidebar-users fa-fw"></i><span> Users & roles</span></a>
+            </li>
+          </ul>
+        </ng-template>
       </div>
       <div class="sidebar__menu__nav sidebar__menu__nav--compact">
         <ul>

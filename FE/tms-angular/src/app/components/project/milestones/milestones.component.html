@@ -19,7 +19,7 @@
           href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
         <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
           media="all" />
-        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+
 
         <div class="table" style="height: 100%;">
           <div id="content" class="column content overflow-content">
@@ -27,7 +27,7 @@
             <div id="content-header" class="content-header content-header-default">
               <div class="content-header-inner">
                 <div class="content-header-title page_title">
-                  Milestones </div>
+                  Phase </div>
               </div>
             </div>
             <div id="content-inner" class="content-inner goals-clear">
@@ -48,8 +48,9 @@
                         create
                         the first milestone.</p>
                       <div class="button-group">
-                        <a [routerLink]="['/milestones-add', projectId]" class="button button-left button-add">
-                          Add Milestone </a>
+                        <a *ngIf="isActive('ADD_MILESTONE')" [routerLink]="['/milestones-add', projectId]"
+                          class="button button-left button-add">
+                          Add Phase </a>
                       </div>
                     </div>
                   </div>
@@ -69,11 +70,12 @@
                           </div>
                           <div class="column summary-column summary-column-first" style="flex-grow: 1;">
                             <div class="summary-title text-ppp">
-                              <a href="index.php?/milestones/view/3">{{milestone.milestoneName}}</a>
+                              <a
+                                [routerLink]="['/milestones', projectId, 'detail', milestone.milestoneId]">{{milestone.milestoneName}}</a>
                             </div>
                             <div class="summary-links text-secondary">
-                              Due on {{milestone.endDate}} | <a class="link"
-                                href="index.php?/milestones/edit/3">Edit</a>
+                              Due on {{milestone.endDate}} | <a *ngIf="isActive('EDIT_MILESTONE')" class="link"
+                                [routerLink]="['/milestones-edit', milestone.milestoneId]">Edit</a>
                             </div>
                             <div class="summary-description">
                               <div *ngIf="milestone.activeTestRun; then thenSummaryBlock else elseSummaryBlock"></div>
@@ -108,7 +110,7 @@
                         <tbody>
                           <tr *ngFor="let milestone of entry.value" class="odd hoverSensitive">
                             <td>
-                              <a [routerLink]="['/test-runs', projectId, 'detail', milestone.milestoneId]">
+                              <a [routerLink]="['/milestones', projectId, 'detail', milestone.milestoneId]">
                                 {{milestone.milestoneName}}
                               </a>
                             </td>
@@ -123,15 +125,21 @@
           </div>
           <div id="sidebar-splitter" class="column splitter sidebar-splitter">
           </div>
-          <div id="sidebar" class="column sidebar" style="width: 250px">
+          <div id="sidebar" class="column sidebar" style="width: 250px;white-space: unset;">
 
             <div class="sidebar-inner">
-              <a id="navigation-milestones-add" class="sidebar-button" [routerLink]="['/milestones-add', projectId]">
-                <span>Add Milestone</span>
+              <a *ngIf="isActive('ADD_MILESTONE')" id="navigation-milestones-add" class="sidebar-button"
+                [routerLink]="['/milestones-add', projectId]">
+                <span>Add Phase</span>
               </a>
-              <p class="top">There are no milestones.</p>
-            </div>
+              <p *ngIf="!(incompleteMilestones && completedMilestones) || (incompleteMilestones.length == 0 && completedMilestones.size ==0)"
+                class="top">There are no milestones.</p>
 
+              <p class="top">There are <strong>{{incompleteMilestones ? incompleteMilestones.length : 0}}</strong>
+                incompleted and
+                <strong>{{completedMilestones ? numCompletedMilestones : 0}}</strong> completed.
+              </p>
+            </div>
           </div>
         </div>
       </div>

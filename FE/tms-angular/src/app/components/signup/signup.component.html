@@ -1,0 +1,90 @@
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/auth-modern-combined.css"
+  media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/font.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/drilldown.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/brand/style.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/brand/brand-modern.css"
+  media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/assembla.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/banner-enterprise-modern.css"
+  media="all" />
+<link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.6.3001/css/autocomplete.css" media="all" />
+
+<div id="form" class="loginpage-form" style="margin: auto; padding-left: 0;">
+  <div class="logo loginpage-logo">
+    <a routerLink="/" target="_blank" class="logo-loginpage"
+      style="background: url('assets/logo.png') center center no-repeat"></a>
+  </div>
+  <div id="form-inner">
+    <h1 class="loginpage-installationname">Test Management</h1>
+    <div id="content">
+      <h1 class="loginpage-login-text">Create Your Account</h1>
+      <br />
+
+      <form
+        action="index.php?/auth/login/L21pbGVzdG9uZXMvb3ZlcnZpZXcvMS1iNTk1YmU1YmQxMTdjNjQ3ZmFmMDRiN2JkYTI1NDcyZjNkMmY0NTdjZWM1MWQ0MzlhZTdmY2NmM2JhNWRhZmMz"
+        method="post">
+
+
+        <div style="min-height:24px;"></div>
+
+        <div class="form-group" style='padding-bottom:10px'>
+          <div class='login-inputx'>
+            <input [(ngModel)]="user.fullname" id='name' class="login-input " type='text' name="name" id="name">
+
+            <label for='name' class="login-label">Full Name <span class="form-required">*</span></label>
+          </div>
+        </div>
+
+        <div class="form-group" style='padding-bottom:10px'>
+          <div class='login-inputx'>
+            <input [(ngModel)]="user.email" id='email' class="login-input " type='text' name="email" id="email">
+
+            <label for='email' class="login-label">Email <span class="form-required">*</span></label>
+          </div>
+        </div>
+
+        <div class="form-group" style='padding-bottom:10px; margin-top: -9px;'>
+          <div class=' login-inputx'>
+            <input [(ngModel)]="user.password" id='password' class="login-input " type='password' name="password"
+              id="password" autocomplete=off>
+            <label for='password' class="login-label">Password <span class="form-required">*</span></label>
+          </div>
+        </div>
+
+        <div class="form-group" style='padding-bottom:10px; margin-top: -9px;'>
+          <div class=' login-inputx'>
+            <input [(ngModel)]="confirmPassword" id='confirm-password' class="login-input " type='password'
+              name="confirm-password" id="confirm-password" autocomplete=off>
+            <label for='confirm-password' class="login-label">Confirm Password <span
+                class="form-required">*</span></label>
+          </div>
+        </div>
+
+        <div class='display-flex' style=" margin-bottom:40px;">
+          <div style="float:left;">
+          </div>
+        </div>
+
+        <button id='button_primary' (click)="submit()" [disabled]="disable()"
+          [style]="disable() ? 'cursor: not-allowed;' : ''"
+          class="loginpage-button-sso-disable loginpage-button-sso-disable-hover  loginpage-button-sso-disable-active">
+          <span class="single-sign-on">Create Account</span>
+        </button>
+
+        <div style="display: flex; justify-content: center;">
+          <span>Already have an account ? <a [routerLink]="'/login'">Log In</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="https://static.testrail.io/7.5.6.3001/js/extensions-combined.js"></script>
+<script type="text/javascript" src="https://static.testrail.io/7.5.6.3001/js/application-combined.js"></script>
+
+<script type="text/javascript" id="js-js-indicator"
+  src="https://static.testrail.io/7.5.6.3001/js/indicator.js"></script>
+<script type="text/javascript" id="js-js-autocomplete"
+  src="https://static.testrail.io/7.5.6.3001/js/autocomplete.js"></script>

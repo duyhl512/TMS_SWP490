@@ -1,4 +1,4 @@
-<div style="display: flex; height: 100%;">
+<div *ngIf="isActive('ADD_TESTRUN')" style="display: flex; height: 100%;">
   <app-new-menu-project [projectId]="testRun.projectId + ''" [selectedMenu]="'test-runs'"></app-new-menu-project>
   <div>
     <section>
@@ -19,7 +19,7 @@
           href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
         <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
           media="all" />
-        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+
         <div class="table" style="height: 100%;">
           <div id="content" class="column content overflow-content">
             <div id="content-header" class="content-header content-header-default">
@@ -50,7 +50,7 @@
                 <div class="form-separator">
                 </div>
                 <div class="form-group">
-                  <label for="milestone_id">Milestone</label>
+                  <label for="milestone_id">Phase</label>
                   <div class="dropdown-size">
                     <select [(ngModel)]="testRun.milestoneId" name="milestone_id" id="milestone_id"
                       class="form-control form-control-full form-select searchable  chzn-done" style="width: 100%;">
@@ -190,17 +190,14 @@
           <div id="sidebar-splitter" class="column splitter sidebar-splitter">
           </div>
           <div id="sidebar" class="column sidebar" style="width: 250px">
-            <div class="sidebar-inner">
+            <div class="sidebar-inner" *ngIf="isActive('CLOSE_TESTRUN') && !testRun.isCompleted">
               <ng-template [ngIf]="currentMode == Mode.Update">
                 <div class="sidebar-h1 top">Actions</div>
                 <p>Archive this test run to prevent future modifications to its tests and results.</p>
                 <div class="sidebar-action">
-                  <button class="button button-close" type="button" (click)="close()">Close this test run</button>
-                </div>
-                <p class="">Delete this test run to remove it from your project.</p>
-                <div class="sidebar-action">
-                  <span class="button button-negative button-delete">
-                    <a class="link-noline">Delete this test run</a> </span>
+                  <button style="padding:0 8px 0 8px" class="button button-close" type="button" (click)="close()">
+                    Close this test run
+                  </button>
                 </div>
               </ng-template>
             </div>

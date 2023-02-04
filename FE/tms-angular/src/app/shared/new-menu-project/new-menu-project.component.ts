@@ -8,7 +8,7 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./new-menu-project.component.scss'],
 })
 export class NewMenuProjectComponent {
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService, private authService: AuthService) { }
   @Input() public selectedMenu = 'overview';
   private project: Project = {
     projectName: '',
@@ -24,7 +24,15 @@ export class NewMenuProjectComponent {
       this.projectService
         .findByProjectId(parseInt(this.projectId))
         .subscribe((project) => {
+          if (project.endDate instanceof Array) {
+            project.endDate = project.endDate[0] + "-" + String(project.endDate[1]).padStart(2, '0') + "-" + String(project.endDate[2]).padStart(2, '0');
+          }
+          if (project.startDate instanceof Array) {
+            project.startDate = project.startDate[0] + "-" + String(project.startDate[1]).padStart(2, '0') + "-" + String(project.startDate[2]).padStart(2, '0');
+          }
           this.project.projectName = project.projectName;
+          this.project.startDate = project.startDate;
+          this.project.endDate = project.endDate;
           this.getProject.emit(this.project);
         });
     }
@@ -39,5 +47,9 @@ export class NewMenuProjectComponent {
   public getFullname() {
     console.log('activeUser' + AuthService.activeUser);
     return AuthService.activeUser.fullname;
+  }
+
+  isActive(functionalityName: string) {
+    return this.authService.isActive(functionalityName);
   }
 }

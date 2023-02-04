@@ -2,7 +2,7 @@
   <app-new-menu [selectedMenu]="'dashboard'"></app-new-menu>
   <div>
     <section>
-      <app-header></app-header>
+      <app-header (onSearch)="refresh($event)"></app-header>
       <div>
         <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/app-modern-combined.css"
           media="all" />
@@ -19,7 +19,7 @@
           href="https://static.testrail.io/7.5.4.2008/css/banner-enterprise-modern.css" media="all" />
         <link type="text/css" rel="stylesheet" href="https://static.testrail.io/7.5.4.2008/css/autocomplete.css"
           media="all" />
-        <link rel="shortcut icon" href="https://static.testrail.io/7.5.4.2008/images/favicon.ico" />
+
 
 
         <div class="table" style="height: 100%;">
@@ -32,9 +32,6 @@
                 </div>
               </div>
             </div>
-            <script type="text/javascript">
-              $("#sites").prop("selectedIndex", 0);
-            </script>
             <div id="content-inner" class="content-inner ">
               <div id="content_container" *ngIf="isActive('DASHBOARD')">
                 <h1 class="top">Projects</h1>
@@ -52,18 +49,22 @@
                         </span>
                       </div>
                       <div class="summary-links text-secondary">
-                        <a class="link" [routerLink]="['/milestones', project.projectId]">Milestones</a> |
+                        <a class="link" [routerLink]="['/milestones', project.projectId]">Phase</a> |
                         <a class="link" [routerLink]="['/test-runs', project.projectId]">Test Runs</a> |
-                        <a class="link" [routerLink]="['/test-cases', project.projectId]">Test Cases</a>
+                        <a class="link" [routerLink]="['/test-cases', project.projectId]">Test Cases</a> |
+                        <a class="link" [routerLink]="['/reports', project.projectId]">Reports</a>
                       </div>
                       <div class="summary-description">
                         Contains <strong>{{project.activeTestRun}}</strong> active test runs and
                         <strong>{{project.activeMilestone}}</strong> active milestones.
+                        <br>
+                        {{project.startDate ? ('start date: ' + project.startDate) : 'No start date'}},
+                        {{project.endDate ? ('end date: ' + project.endDate) : 'no end date'}}
                       </div>
                     </div>
                   </div>
                 </div>
-                <mat-paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="length"
+                <mat-paginator class="demo-paginator" (page)="handlePageEvent($event, projectName)" [length]="length"
                   [pageSize]="pageSize" [disabled]="disabled" [showFirstLastButtons]="showFirstLastButtons"
                   [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []" [hidePageSize]="hidePageSize"
                   [pageIndex]="pageIndex" aria-label="Select page">

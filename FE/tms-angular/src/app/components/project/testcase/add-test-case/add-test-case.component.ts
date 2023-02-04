@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../services/auth.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,15 +17,6 @@ import { TestCaseService } from 'src/app/services/test-case.service';
   styleUrls: ['./add-test-case.component.scss'],
 })
 export class AddTestCaseComponent implements OnInit {
-  testCase: TestCase = {
-    caseName: '',
-    projectId: 0,
-    userId: 2,
-  };
-  sections: Section[] = [];
-  priorities: Priority[] = [];
-  currentMode: Mode = Mode.Create;
-  Mode = Mode;
 
   constructor(
     private sectionService: SectionService,
@@ -33,8 +25,20 @@ export class AddTestCaseComponent implements OnInit {
     private testCaseService: TestCaseService,
     private router: Router,
     private toastr: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
+
+  testCase: TestCase = {
+    caseName: '',
+    projectId: 0,
+    sectionId: undefined,
+    priorityId: undefined
+  };
+  sections: Section[] = [];
+  priorities: Priority[] = [];
+  currentMode: Mode = Mode.Create;
+  Mode = Mode;
 
   ngOnInit(): void {
     this.currentMode = this.router.url.startsWith('/test-cases-edit/') ? Mode.Update : Mode.Create;
@@ -57,12 +61,6 @@ export class AddTestCaseComponent implements OnInit {
         default:
           break;
       }
-      console.log('Test case data: ' + this.testCase);
-      this.sectionService
-        .findAllByProjectId(this.testCase.projectId)
-        .subscribe((sections) => {
-          this.sections = sections;
-        });
       this.priorityService.findAll().subscribe((priorities) => {
         this.priorities = priorities;
       });
@@ -109,5 +107,9 @@ export class AddTestCaseComponent implements OnInit {
         this.toastr.error('Update test case failed', 'Error');
       },
     });
+  }
+
+  isActive(functionalityName: string) {
+    return this.authService.isActive(functionalityName);
   }
 }

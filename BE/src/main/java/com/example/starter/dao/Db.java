@@ -20,8 +20,8 @@ public class Db {
             config.setMaximumPoolSize(10);
             config.setDataSourceClassName("com.microsoft.sqlserver.jdbc.SQLServerDataSource");
             config.setJdbcUrl("jdbc:sqlserver://127.0.0.1:1433");
-            config.addDataSourceProperty("user", "sa");
-            config.addDataSourceProperty("password", "12345");
+            config.addDataSourceProperty("user", "SA");
+            config.addDataSourceProperty("password", "Thang1997");
             config.addDataSourceProperty("databaseName", "tms_db");
             config.setPoolName("tms_db");
             config.setMinimumIdle(1);

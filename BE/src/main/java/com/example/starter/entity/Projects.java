@@ -1,5 +1,6 @@
 package com.example.starter.entity;
 
+import java.time.LocalDate;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -18,9 +19,11 @@ public class Projects {
 
     public Projects() {}
 
-    public Projects(Integer projectId, String projectName, Long activeMilestone, Long activeTestRun) {
+    public Projects(Integer projectId, String projectName, LocalDate startDate, LocalDate endDate, Long activeMilestone, Long activeTestRun) {
         this.projectId = projectId;
         this.projectName = projectName;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.activeMilestone = activeMilestone;
         this.activeTestRun = activeTestRun;
     }
@@ -42,6 +45,12 @@ public class Projects {
     @Column(name = "completed", nullable = false)
     private Boolean completed = false;
 
+    @Column()
+    private LocalDate startDate;
+
+    @Column()
+    private LocalDate endDate;
+
     @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set<Milestones> projectMilestoness;
@@ -54,6 +63,18 @@ public class Projects {
     @JsonIgnore
     @OneToMany(mappedBy = "project")
     private Set<TestRun> projectTestRuns;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private Set<Activity> projectActivitys;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private Set<Report> projectReports;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private Set<ProjectUser> projectProjectUsers;
 
     @Transient
     private Long activeMilestone;
@@ -101,6 +122,22 @@ public class Projects {
         this.completed = completed;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(final LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(final LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     public Set<Milestones> getProjectMilestoness() {
         return projectMilestoness;
     }
@@ -139,6 +176,30 @@ public class Projects {
 
     public void setActiveTestRun(Long activeTestRun) {
         this.activeTestRun = activeTestRun;
+    }
+
+    public Set<Activity> getProjectActivitys() {
+        return projectActivitys;
+    }
+
+    public void setProjectActivitys(final Set<Activity> projectActivitys) {
+        this.projectActivitys = projectActivitys;
+    }
+
+    public Set<Report> getProjectReports() {
+        return projectReports;
+    }
+
+    public void setProjectReports(final Set<Report> projectReports) {
+        this.projectReports = projectReports;
+    }
+
+    public Set<ProjectUser> getProjectProjectUsers() {
+        return projectProjectUsers;
+    }
+
+    public void setProjectProjectUsers(final Set<ProjectUser> projectProjectUsers) {
+        this.projectProjectUsers = projectProjectUsers;
     }
 
     @Override

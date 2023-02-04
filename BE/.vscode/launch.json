@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ReportService",
+            "request": "launch",
+            "mainClass": "com.example.starter.service.ReportService",
+            "projectName": "starter"
+        },
+        {
+            "type": "java",
+            "name": "Launch BaseService",
+            "request": "launch",
+            "mainClass": "com.example.starter.service.BaseService",
+            "projectName": "starter"
+        },
+        {
+            "type": "java",
             "name": "Launch FunctionalityService",
             "request": "launch",
             "mainClass": "com.example.starter.service.FunctionalityService",

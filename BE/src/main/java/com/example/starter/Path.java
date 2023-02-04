@@ -2,7 +2,6 @@ package com.example.starter;
 
 public enum Path {
     LOGIN("/login"),
-    LOGOUT("/logout"),
     PROJECT("/project"),
     TEST_CASE("/test-case"),
     MILESTONE("/milestone"),
@@ -11,7 +10,12 @@ public enum Path {
     PRIORITY("/priority"),
     USER("/user"),
     ROLE("/role"),
-    RESULT("/result");
+    RESULT("/result"),
+    ACTIVITY("/activity"),
+    SIGNUP("/signup"),
+    ATTACHMENT("/attachment"),
+    REPORT("/report"),
+    PROJECT_USER("/project-user");
 
     private final String stringPath;
 

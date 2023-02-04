@@ -29,6 +29,8 @@ public class Milestones {
         this.projectId = milestones.projectId;
         this.completedOn = milestones.completedOn;
         this.status = milestones.status;
+        this.userId = milestones.userId;
+        this.isCompleted = milestones.isCompleted;
         this.activeTestRun = activeTestRun;
     }
 
@@ -55,11 +57,17 @@ public class Milestones {
     @Column(name = "project_id", nullable = false)
     private Integer projectId;
 
-    @Column(name = "completed_on", nullable = false)
+    @Column(name = "completed_on")
     private LocalDate completedOn;
 
     @Column(name = "status")
     private Boolean status;
+
+    @Column(nullable = false)
+    private Integer userId;
+
+    @Column(name = "is_completed", nullable = false)
+    private Boolean isCompleted = false;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -69,6 +77,11 @@ public class Milestones {
     @JsonIgnore
     @OneToMany(mappedBy = "milestone")
     private Set<TestRun> milestoneTestRuns;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false, insertable = false, updatable = false)
+    private Users user;
 
     public Integer getMilestoneId() {
         return milestoneId;
@@ -142,6 +155,14 @@ public class Milestones {
         this.status = status;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(final Integer userId) {
+        this.userId = userId;
+    }
+
     public Projects getProject() {
         return project;
     }
@@ -158,19 +179,24 @@ public class Milestones {
         this.milestoneTestRuns = milestoneTestRuns;
     }
 
-    @Transient
-    private Boolean completed;
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(final Users user) {
+        this.user = user;
+    }
+
+    public Boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+    public void setIsCompleted(final Boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
 
     @Transient
     private Long activeTestRun;
-
-    public Boolean getCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
 
     public Long getActiveTestRun() {
         return this.activeTestRun;

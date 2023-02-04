@@ -58,6 +58,22 @@ public class Users {
     @OneToMany(mappedBy = "assignedTo")
     private Set<TestRun> assignedToTestRuns;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Activity> userActivitys;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Milestones> userMilestoness;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Report> userReports;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<ProjectUser> userProjectUsers;
+
     public Integer getUserId() {
         return userId;
     }
@@ -147,6 +163,38 @@ public class Users {
 
     public void setFunctionalities(List<Functionality> functionalities) {
         this.functionalities = functionalities;
+    }
+
+    public Set<Activity> getUserActivitys() {
+        return userActivitys;
+    }
+
+    public void setUserActivitys(final Set<Activity> userActivitys) {
+        this.userActivitys = userActivitys;
+    }
+
+    public Set<Milestones> getUserMilestoness() {
+        return userMilestoness;
+    }
+
+    public void setUserMilestoness(final Set<Milestones> userMilestoness) {
+        this.userMilestoness = userMilestoness;
+    }
+
+    public Set<Report> getUserReports() {
+        return userReports;
+    }
+
+    public void setUserReports(final Set<Report> userReports) {
+        this.userReports = userReports;
+    }
+
+    public Set<ProjectUser> getUserProjectUsers() {
+        return userProjectUsers;
+    }
+
+    public void setUserProjectUsers(final Set<ProjectUser> userProjectUsers) {
+        this.userProjectUsers = userProjectUsers;
     }
 
 }
